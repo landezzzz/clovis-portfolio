@@ -172,8 +172,22 @@ button{font:inherit}
 .about-text .h3{margin-top:14px}
 .about-text .copy{margin-top:27px;display:flex;flex-direction:column;gap:20px;font-size:16px;line-height:1.5;color:var(--mute)}
 .about-text .copy b{display:block;color:#fff;font-weight:700}
-.about-media{display:flex;flex-direction:column;align-items:center}
-.about-media img.portrait{width:100%;aspect-ratio:803/734;object-fit:contain}
+.about-text .h2{max-width:560px}
+.about-media{display:flex;flex-direction:column;align-items:center;align-self:center;width:100%}
+.about-figure{position:relative;margin:0;width:min(640px,100%);padding-top:9%}
+.about-panel{position:absolute;inset:22% 0 0 0;border-radius:24px;background:url(img/pattern-dark-v3.webp) center/900px auto,radial-gradient(120% 90% at 50% 0%,#2c6b51 0%,#1f4d3a 45%,#0e271d 100%);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.about-panel::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(255,255,255,.08)}
+.about-portrait{position:relative;display:block;width:100%;height:auto;clip-path:inset(-40% 0 0 0 round 0 0 24px 24px)}
+.intro-btn{position:absolute;left:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);display:inline-flex;align-items:center;gap:14px;padding:10px 22px 10px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(10,24,18,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:inherit;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}
+.intro-btn:hover{background:rgba(10,24,18,.82);border-color:rgba(255,255,255,.5)}
+.intro-play{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--green-hi,#276048);flex-shrink:0;padding-left:3px;box-sizing:border-box}
+.intro-play::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.35);animation:introPulse 2.4s ease-out infinite}
+@keyframes introPulse{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){.intro-play::before{animation:none;opacity:0}}
+@media (max-width:1180px){.about-media{margin-bottom:clamp(28px,5vw,44px)}}
+@media (max-width:760px){.intro-btn .intro-txt small{display:none}.about-figure .intro-btn{padding:6px 16px 6px 6px;gap:10px}.intro-btn .intro-play{width:40px;height:40px}}
+.intro-txt b{display:block;font-size:17px;font-weight:600;line-height:1.2}
+.intro-txt small{display:block;margin-top:2px;font-size:14px;color:rgba(255,255,255,.7)}
 .watch{margin-top:28px;display:inline-flex;align-items:center;gap:14px;min-height:48px;background:none;border:0;color:#fff;font-size:23px;cursor:pointer;padding:0}
 .watch img{width:42px;height:42px}
 
@@ -321,6 +335,32 @@ button{font:inherit}
 .vid-bar a:hover{text-decoration:underline}
 .vid-frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---------- Beyond the Logo videos ---------- */
+@font-face{font-family:'Instrument Serif';src:url(fonts/instrument-serif-latin-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+.btl-grid{margin-top:clamp(32px,3.5vw,64px);width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,1.4vw,24px);text-align:left}
+.btl-card{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:inherit}
+.btl-cover{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(130% 90% at 0% 0%,#24493a 0%,#0f1f18 38%,#060807 75%);display:flex;flex-direction:column;align-items:center;text-align:center;padding:9% 6% 0;box-sizing:border-box;color:#fff;transition:transform .35s,box-shadow .35s}
+.btl-card:hover .btl-cover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.btl-kicker{font-size:clamp(8px,.62vw,11px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.9}
+.btl-title{margin-top:4%;font-family:var(--font);font-weight:900;font-size:clamp(22px,2.1vw,38px);line-height:.92;text-transform:uppercase;letter-spacing:-.01em}
+.btl-ep{margin-top:13%;font-size:clamp(9px,.7vw,12px);font-weight:500;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.btl-topic{margin-top:4%;font-family:'Instrument Serif',Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(20px,1.75vw,32px);line-height:1;text-wrap:balance}
+.btl-face{position:absolute;left:-6%;bottom:-2%;width:58%;height:auto;-webkit-mask-image:linear-gradient(to top,#000 55%,transparent 100%);mask-image:linear-gradient(to top,#000 55%,transparent 100%);filter:grayscale(1) contrast(1.05)}
+.btl-mark{position:absolute;right:8%;bottom:6%;width:15%;height:auto}
+.btl-play{position:absolute;left:50%;top:62%;margin-left:-26px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;padding-left:3px;box-sizing:border-box;background:rgba(39,96,72,.92);box-shadow:0 0 0 6px rgba(255,255,255,.12);opacity:0;transform:scale(.85);transition:opacity .25s,transform .25s}
+.btl-card:hover .btl-play,.btl-card:focus-visible .btl-play{opacity:1;transform:scale(1)}
+.btl-line{font-size:15px;line-height:1.4;color:var(--mute)}
+.btl-follow{margin-top:clamp(32px,3.3vw,56px);min-height:51px;padding:0 30px;gap:10px}
+@media (hover:none){.btl-play{opacity:1;transform:none;left:auto;right:7%;top:5%;margin:0;width:36px;height:36px}}
+@media (max-width:1180px){
+  .btl-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .btl-card{flex:0 0 clamp(200px,34vw,280px);scroll-snap-align:start}
+  .btl-title{font-size:clamp(26px,4vw,36px)}
+  .btl-topic{font-size:clamp(22px,3.4vw,30px)}
+  .btl-kicker{font-size:10px}.btl-ep{font-size:11px}
+}
+@media (max-width:760px){.btl-card{flex-basis:64vw}.btl-title{font-size:clamp(26px,8vw,36px)}.btl-topic{font-size:clamp(22px,7vw,30px)}}
 
 /* ---------- PROJECT PAGES ---------- */
 .back-link{display:inline-flex;align-items:center;min-height:44px;margin-top:clamp(8px,1.4vw,20px);color:var(--mute);text-decoration:none;font-size:16px;transition:color .2s}
@@ -704,7 +744,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     <div class="wrap">
       <div class="about">
         <div class="about-text">
-          <h2 class="h3">From software engineering to<br>structured brand systems</h2>
+          <h2 class="h2">From software engineering to structured brand systems</h2>
           <p class="small" style="margin-top:10px">Clovis Nkwawir — Brand Designer</p>
           <div class="copy">
             <p>I started out studying software engineering before moving into design. That background shapes how I work: I build brands as systems, with clear rules, consistent structure, and guidelines a team can actually use.</p>
@@ -718,11 +758,83 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
           </div>
         </div>
         <div class="about-media">
-          <img class="portrait" src="img/me.webp" alt="Portrait of Clovis Nkwawir" width="803" height="734">
-          <button type="button" class="watch" id="watchBtn"><img src="icons/play.svg" alt="">Watch intro</button>
-          
+          <figure class="about-figure">
+            <div class="about-panel" aria-hidden="true"></div>
+            <img class="about-portrait" src="img/clovis-portrait.webp" alt="Portrait of Clovis Nkwawir" width="1300" height="1239">
+            <button type="button" class="intro-btn" id="watchBtn"><span class="intro-play" aria-hidden="true"><svg width="16" height="18" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span><span class="intro-txt"><b>Watch the intro</b><small>Who I am and how I work</small></span></button>
+          </figure>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="sec center" id="videos" style="scroll-margin-top:20px">
+    <div class="wrap center">
+      <h2 class="h2">Beyond the Logo</h2>
+      <p class="sub" style="margin-top:22px;max-width:700px">A short video series on TikTok where I break branding down from the ground up: no jargon, no fluff, just ideas that make sense for people building a business.</p>
+      <div class="btl-grid">
+        <a class="btl-card" href="https://www.tiktok.com/@clovis_designer/video/7675579023728446742" target="_blank" rel="noopener" aria-label="Watch Beyond the Logo, episode 1: Branding, on TikTok">
+          <div class="btl-cover">
+            <span class="btl-kicker">A branding series</span>
+            <span class="btl-title">Beyond<br>the logo</span>
+            <span class="btl-ep">Episode 1</span>
+            <span class="btl-topic">Branding</span>
+            <img class="btl-face" src="img/clovis-portrait.webp" alt="" loading="lazy" width="1300" height="1239">
+            <img class="btl-mark" src="icons/logo-mark.svg" alt="" width="40" height="41">
+            <span class="btl-play" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span>
+          </div>
+          <p class="btl-line">Everyone says a logo isn’t a brand. Here is why.</p>
+        </a>
+        <a class="btl-card" href="https://www.tiktok.com/@clovis_designer/video/7675580229150084374" target="_blank" rel="noopener" aria-label="Watch Beyond the Logo, episode 2: Visual Identity, on TikTok">
+          <div class="btl-cover">
+            <span class="btl-kicker">A branding series</span>
+            <span class="btl-title">Beyond<br>the logo</span>
+            <span class="btl-ep">Episode 2</span>
+            <span class="btl-topic">Visual Identity</span>
+            <img class="btl-face" src="img/clovis-portrait.webp" alt="" loading="lazy" width="1300" height="1239">
+            <img class="btl-mark" src="icons/logo-mark.svg" alt="" width="40" height="41">
+            <span class="btl-play" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span>
+          </div>
+          <p class="btl-line">Why some brands are recognisable without their logo.</p>
+        </a>
+        <a class="btl-card" href="https://www.tiktok.com/@clovis_designer/video/7675580372406652163" target="_blank" rel="noopener" aria-label="Watch Beyond the Logo, episode 3: Brand Equity, on TikTok">
+          <div class="btl-cover">
+            <span class="btl-kicker">A branding series</span>
+            <span class="btl-title">Beyond<br>the logo</span>
+            <span class="btl-ep">Episode 3</span>
+            <span class="btl-topic">Brand Equity</span>
+            <img class="btl-face" src="img/clovis-portrait.webp" alt="" loading="lazy" width="1300" height="1239">
+            <img class="btl-mark" src="icons/logo-mark.svg" alt="" width="40" height="41">
+            <span class="btl-play" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span>
+          </div>
+          <p class="btl-line">Why people pay more for a name they trust.</p>
+        </a>
+        <a class="btl-card" href="https://www.tiktok.com/@clovis_designer/video/7675581349620763926" target="_blank" rel="noopener" aria-label="Watch Beyond the Logo, episode 4: Brand Positioning, on TikTok">
+          <div class="btl-cover">
+            <span class="btl-kicker">A branding series</span>
+            <span class="btl-title">Beyond<br>the logo</span>
+            <span class="btl-ep">Episode 4</span>
+            <span class="btl-topic">Brand Positioning</span>
+            <img class="btl-face" src="img/clovis-portrait.webp" alt="" loading="lazy" width="1300" height="1239">
+            <img class="btl-mark" src="icons/logo-mark.svg" alt="" width="40" height="41">
+            <span class="btl-play" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span>
+          </div>
+          <p class="btl-line">Being good at something is not the same as being known for it.</p>
+        </a>
+        <a class="btl-card" href="https://www.tiktok.com/@clovis_designer/video/7678399360530451734" target="_blank" rel="noopener" aria-label="Watch Beyond the Logo, episode 5: Brand Differentiation, on TikTok">
+          <div class="btl-cover">
+            <span class="btl-kicker">A branding series</span>
+            <span class="btl-title">Beyond<br>the logo</span>
+            <span class="btl-ep">Episode 5</span>
+            <span class="btl-topic">Brand Differentiation</span>
+            <img class="btl-face" src="img/clovis-portrait.webp" alt="" loading="lazy" width="1300" height="1239">
+            <img class="btl-mark" src="icons/logo-mark.svg" alt="" width="40" height="41">
+            <span class="btl-play" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 16 18"><path d="M2 1.5v15L15 9z" fill="#fff"/></svg></span>
+          </div>
+          <p class="btl-line">What makes one of two similar businesses the preferred choice.</p>
+        </a>
+      </div>
+      <a class="btn-sm dark btl-follow" href="https://www.tiktok.com/@clovis_designer" target="_blank" rel="noopener"><svg width="16" height="18" viewBox="0 0 24 28" fill="currentColor" aria-hidden="true"><path d="M17.5 0h-4.6v18.6a4.1 4.1 0 1 1-4.1-4.1c.4 0 .8 0 1.2.2V10a8.8 8.8 0 1 0 7.5 8.6V9.2a11 11 0 0 0 6.5 2.1V6.6A6.5 6.5 0 0 1 17.5 0z"/></svg>Follow the series on TikTok</a>
     </div>
   </section>
 
