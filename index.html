@@ -526,6 +526,47 @@ body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
 .pj-hero .h1,.cs-hero .h1,.flagship-text .h2{margin-top:0}
 .quote-grid{margin-top:clamp(28px,3vw,56px)}
 
+/* ---------- brand questionnaire ---------- */
+[hidden]{display:none!important}
+.bq-card{margin-top:clamp(28px,3vw,52px);width:min(920px,100%);text-align:left;box-sizing:border-box}
+.bq-progress{height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin-bottom:28px}
+.bq-progress span{display:block;height:100%;width:16%;background:var(--accent);transition:width .3s}
+.bq-count{font-size:14px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.bq-grid{margin-top:26px}
+.bq-f label i,.bq-f legend i{font-style:normal;color:var(--accent);margin-left:2px}
+fieldset.bq-f{border:0;margin:0;padding:0;min-width:0}
+fieldset.bq-f legend{padding:0;margin-bottom:12px}
+.bq-hint{display:block;margin-top:4px;font-size:14px;color:var(--mute)}
+.bq-f textarea{height:auto;min-height:110px}
+.bq-f input[type=date]{color-scheme:dark}
+.bq-group .reason label{font-size:15px;min-height:38px;padding:0 14px}
+.bq-scale{display:grid;grid-template-columns:100px minmax(0,1fr) 100px;align-items:center;gap:12px;margin-top:10px;font-size:15px;color:var(--mute)}
+.bq-scale span:last-child{text-align:right}
+.bq-dots{display:flex;justify-content:space-between;max-width:320px;width:100%;margin:0 auto}
+.bq-dots input{position:absolute;opacity:0;pointer-events:none}
+.bq-dots label{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.bq-dots input:checked+label{background:#fff;border-color:#fff;box-shadow:inset 0 0 0 7px #3f9270}
+.bq-dots input:focus-visible+label{outline:2px solid var(--accent);outline-offset:3px}
+.bq-dots label:hover{border-color:#fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.bq-hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.bq-error{margin-top:18px;color:#e0a36b}
+.bq-nav{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;margin-top:28px}
+.bq-nav .btn-sm{min-height:48px;min-width:150px}
+#bqBack{margin-right:auto}
+.bq-fine{margin-top:18px}
+.bq-done{padding:8px 0}
+.brief-cta{margin-top:clamp(24px,2.4vw,40px);width:100%;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;padding:22px clamp(20px,3vw,36px);text-align:left}
+.brief-cta b{display:block;font-size:19px}
+.brief-cta div span{display:block;margin-top:4px;color:var(--mute);font-size:16px}
+.about-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.about-actions .btn-sm{min-height:46px}
+@media (max-width:760px){
+  .bq-scale{grid-template-columns:1fr 1fr;row-gap:8px}
+  .bq-dots{grid-column:1 / -1;grid-row:2;max-width:none}
+  .bq-nav .btn-sm{flex:1 1 auto}
+}
+
 /* ---------- image viewer ---------- */
 img[data-zoom],.ia-item .frame{cursor:zoom-in}
 .lb{position:fixed;z-index:200;inset:0;display:flex;flex-direction:column;background:rgba(0,0,0,.985);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
@@ -750,6 +791,10 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
             <p>I started out studying software engineering before moving into design, and that background still shapes how I work: I build brands as systems, with clear rules and guidelines a team can actually use.</p>
             <p>Over the last five years I’ve worked as a production designer at a print shop, as brand designer for an NGO across education and health, and as a freelancer for clients in packaging, food, beauty, real estate and fintech. More than 140 projects since 2022, from first logos to full brand systems.</p>
             <p>Based in Douala, I design for real conditions: what printers can produce, what customers will understand, and what budgets allow. I use 3D and AI-assisted tools for product visuals and mockups, always in service of the brand, never as a replacement for it.</p>
+          </div>
+          <div class="about-actions">
+            <a class="btn-sm" href="docs/clovis-nkwawir-resume.pdf" download="Clovis-Nkwawir-Resume.pdf"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download my CV</a>
+            <a class="btn-sm dark" href="docs/clovis-nkwawir-resume.pdf" target="_blank" rel="noopener">View CV</a>
           </div>
         </div>
         <div class="about-media">
@@ -1975,11 +2020,14 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     <div class="wrap center">
       <h1 class="h2">Start a Brand Development Conversation</h1>
       <p class="sub" style="margin-top:18px;max-width:600px">If your business is preparing for growth, improving credibility, or developing a structured brand system, this is the best place to start the conversation.</p>
+      <a class="card brief-cta" href="#brief" style="text-decoration:none"><div><b>Starting a branding project?</b><span>Fill in the brand questionnaire so I can prepare properly before we talk.</span></div><span class="btn-sm" style="margin:0">Open the questionnaire →</span></a>
       <div class="contact-grid" style="width:100%">
         <div class="card form-card">
           <h2 class="cs-title">Project Qualification Form</h2>
           <p class="sub" style="margin-top:10px">This helps determine if we are a good fit to work together.</p>
-          <form id="inquiry" novalidate>
+          <form id="inquiry" name="inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="inquiry">
+            <p class="bq-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
             <div class="form-grid">
               <div class="field full"><span class="flabel" id="reasonLbl">I’m reaching out about*</span>
                 <div class="reason" role="radiogroup" aria-labelledby="reasonLbl">
@@ -2001,7 +2049,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
             <p id="formError" class="small" style="margin-top:16px;color:#e0a36b" hidden>Please fill in the fields marked with *.</p>
             <button type="submit" class="btn-sm" style="margin-top:24px;min-width:260px;min-height:51px">Submit Inquiry &nbsp;→</button>
           </form>
-          <div id="thanks" class="thanks" hidden><b id="thanksTitle">Thanks.</b><p>This is a test build, so nothing was sent. On the live site, your message will go straight to Clovis, who replies within 24–48 hours.</p></div>
+          <div id="thanks" class="thanks" hidden><b id="thanksTitle">Thanks.</b><p id="thanksText">Your message has been sent. I reply within 24–48 hours.</p></div>
         </div>
         <aside class="card direct">
           <h2 class="cs-title" style="font-size:clamp(26px,2.08vw,40px)">Direct Contact</h2>
@@ -2014,6 +2062,75 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
           <p class="note">Engagements begin with a discovery consultation.</p>
           <div class="fine"><span>Response time within 24–48 hours</span><span>All information shared is confidential</span></div>
         </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================== BRAND QUESTIONNAIRE =========================== -->
+<div data-page="brief" hidden>
+  <section class="sec center" style="padding-top:clamp(40px,3vw,60px);padding-bottom:clamp(72px,7vw,120px)">
+    <div class="wrap center">
+      <h1 class="h2">Brand Questionnaire</h1>
+      <p class="sub" style="margin-top:18px;max-width:640px">Clear answers lead to better design. This takes about 15 minutes; your answers are saved on this device as you go, so you can come back and finish later.</p>
+      <div class="card form-card bq-card">
+        <div class="bq-progress" aria-hidden="true"><span id="bqBar"></span></div>
+        <form id="bqForm" name="brand-brief" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" novalidate>
+          <input type="hidden" name="form-name" value="brand-brief">
+          <p class="bq-hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <input type="file" name="brief_pdf" class="bq-hp" tabindex="-1" aria-hidden="true">
+          <section class="bq-step" data-step="0" aria-labelledby="bq-h0">
+            <p class="bq-count">Step 1 of 6</p>
+            <h2 class="cs-title" id="bq-h0">About you</h2>
+            <p class="sub" style="margin-top:8px">So I know who I’m talking to.</p>
+            <div class="form-grid bq-grid"><div class="field bq-f"><label for="bq-name">Your full name<i aria-hidden="true">*</i></label><input id="bq-name" name="name" type="text" autocomplete="name" required></div><div class="field bq-f"><label for="bq-email">Email address<i aria-hidden="true">*</i></label><input id="bq-email" name="email" type="email" autocomplete="email" required></div><div class="field bq-f"><label for="bq-whatsapp">WhatsApp number</label><input id="bq-whatsapp" name="whatsapp" type="tel" placeholder="+237 …" autocomplete="tel"></div><div class="field bq-f"><label for="bq-brand_name">Business / brand name<i aria-hidden="true">*</i></label><input id="bq-brand_name" name="brand_name" type="text" autocomplete="organization" required></div><div class="field bq-f"><label for="bq-links">Website or social media links</label><input id="bq-links" name="links" type="text" placeholder="www… / @yourbrand"></div><div class="field bq-f"><label for="bq-location">Where is the business based?</label><input id="bq-location" name="location" type="text" placeholder="City, country"></div></div>
+          </section>
+          <section class="bq-step" data-step="1" hidden aria-labelledby="bq-h1">
+            <p class="bq-count">Step 2 of 6</p>
+            <h2 class="cs-title" id="bq-h1">Your business</h2>
+            <p class="sub" style="margin-top:8px">The more I understand the business, the better the brand will fit it.</p>
+            <div class="form-grid bq-grid"><div class="field bq-f full"><label for="bq-business">What does your business do?<i aria-hidden="true">*</i></label><textarea id="bq-business" name="business" rows="4" placeholder="Your products or services, who pays you, and how." required></textarea></div><fieldset class="field bq-f full bq-group" data-name="stage" data-req="1"><legend class="flabel">Where is the business today?<i aria-hidden="true">*</i></legend><div class="reason"><input type="radio" name="stage" id="bq-stage-0" value="Not launched yet"><label for="bq-stage-0">Not launched yet</label><input type="radio" name="stage" id="bq-stage-1" value="Launched less than 2 years ago"><label for="bq-stage-1">Launched less than 2 years ago</label><input type="radio" name="stage" id="bq-stage-2" value="Established, ready to rebrand"><label for="bq-stage-2">Established, ready to rebrand</label><input type="radio" name="stage" id="bq-stage-3" value="Launching a new product or sub-brand"><label for="bq-stage-3">Launching a new product or sub-brand</label></div></fieldset><div class="field bq-f full"><label for="bq-why_now">Why are you investing in your brand now?</label><textarea id="bq-why_now" name="why_now" rows="4" placeholder="A launch, a new market, bigger clients, investors, the current look holding you back…"></textarea></div><div class="field bq-f full"><label for="bq-difference">What makes you different from your competitors?<i aria-hidden="true">*</i></label><textarea id="bq-difference" name="difference" rows="4" placeholder="Quality, price, experience, story, speed, expertise…" required></textarea></div><div class="field bq-f"><label for="bq-competitors">Who are your main competitors?</label><input id="bq-competitors" name="competitors" type="text" placeholder="Names or links"></div><div class="field bq-f full"><label for="bq-goal">A year from now, what should this brand have helped you achieve?</label><textarea id="bq-goal" name="goal" rows="4"></textarea></div></div>
+          </section>
+          <section class="bq-step" data-step="2" hidden aria-labelledby="bq-h2">
+            <p class="bq-count">Step 3 of 6</p>
+            <h2 class="cs-title" id="bq-h2">Your audience</h2>
+            <p class="sub" style="margin-top:8px">A brand is built for the people who choose it.</p>
+            <div class="form-grid bq-grid"><div class="field bq-f full"><label for="bq-audience">Who are your main customers?<i aria-hidden="true">*</i></label><textarea id="bq-audience" name="audience" rows="4" placeholder="Businesses or individuals, age, location, profession, income level…" required></textarea></div><div class="field bq-f full"><label for="bq-audience_why">What problem do you solve for them, and why do they choose you?</label><textarea id="bq-audience_why" name="audience_why" rows="4"></textarea></div><div class="field bq-f full"><label for="bq-perception">What should people think or feel when they see your brand?</label><textarea id="bq-perception" name="perception" rows="4"></textarea></div></div>
+          </section>
+          <section class="bq-step" data-step="3" hidden aria-labelledby="bq-h3">
+            <p class="bq-count">Step 4 of 6</p>
+            <h2 class="cs-title" id="bq-h3">Personality</h2>
+            <p class="sub" style="margin-top:8px">How the brand should come across.</p>
+            <div class="form-grid bq-grid"><fieldset class="field bq-f full bq-group" data-name="feel" data-max="5"><legend class="flabel">How should your brand feel?<small class="bq-hint">Pick up to five.</small></legend><div class="reason"><input type="checkbox" name="feel" id="bq-feel-0" value="Modern"><label for="bq-feel-0">Modern</label><input type="checkbox" name="feel" id="bq-feel-1" value="Professional"><label for="bq-feel-1">Professional</label><input type="checkbox" name="feel" id="bq-feel-2" value="Friendly"><label for="bq-feel-2">Friendly</label><input type="checkbox" name="feel" id="bq-feel-3" value="Bold"><label for="bq-feel-3">Bold</label><input type="checkbox" name="feel" id="bq-feel-4" value="Minimal"><label for="bq-feel-4">Minimal</label><input type="checkbox" name="feel" id="bq-feel-5" value="Playful"><label for="bq-feel-5">Playful</label><input type="checkbox" name="feel" id="bq-feel-6" value="Luxury"><label for="bq-feel-6">Luxury</label><input type="checkbox" name="feel" id="bq-feel-7" value="Tech-focused"><label for="bq-feel-7">Tech-focused</label><input type="checkbox" name="feel" id="bq-feel-8" value="Natural / organic"><label for="bq-feel-8">Natural / organic</label><input type="checkbox" name="feel" id="bq-feel-9" value="Traditional"><label for="bq-feel-9">Traditional</label><input type="checkbox" name="feel" id="bq-feel-10" value="Youthful"><label for="bq-feel-10">Youthful</label><input type="checkbox" name="feel" id="bq-feel-11" value="Trustworthy"><label for="bq-feel-11">Trustworthy</label></div></fieldset><div class="field bq-f"><label for="bq-feel_other">Any other words?</label><input id="bq-feel_other" name="feel_other" type="text" placeholder="Ambitious, warm, timeless…"></div><fieldset class="field bq-f full"><legend class="flabel">Where does your brand sit between these?</legend><div class="bq-scale" role="radiogroup" aria-label="Classic to Modern"><span>Classic</span><div class="bq-dots"><input type="radio" name="scale_classic_modern" id="scale_classic_modern-1" value="1"><label for="scale_classic_modern-1" title="1 of 5"><span class="sr">1</span></label><input type="radio" name="scale_classic_modern" id="scale_classic_modern-2" value="2"><label for="scale_classic_modern-2" title="2 of 5"><span class="sr">2</span></label><input type="radio" name="scale_classic_modern" id="scale_classic_modern-3" value="3"><label for="scale_classic_modern-3" title="3 of 5"><span class="sr">3</span></label><input type="radio" name="scale_classic_modern" id="scale_classic_modern-4" value="4"><label for="scale_classic_modern-4" title="4 of 5"><span class="sr">4</span></label><input type="radio" name="scale_classic_modern" id="scale_classic_modern-5" value="5"><label for="scale_classic_modern-5" title="5 of 5"><span class="sr">5</span></label></div><span>Modern</span></div><div class="bq-scale" role="radiogroup" aria-label="Serious to Playful"><span>Serious</span><div class="bq-dots"><input type="radio" name="scale_serious_playful" id="scale_serious_playful-1" value="1"><label for="scale_serious_playful-1" title="1 of 5"><span class="sr">1</span></label><input type="radio" name="scale_serious_playful" id="scale_serious_playful-2" value="2"><label for="scale_serious_playful-2" title="2 of 5"><span class="sr">2</span></label><input type="radio" name="scale_serious_playful" id="scale_serious_playful-3" value="3"><label for="scale_serious_playful-3" title="3 of 5"><span class="sr">3</span></label><input type="radio" name="scale_serious_playful" id="scale_serious_playful-4" value="4"><label for="scale_serious_playful-4" title="4 of 5"><span class="sr">4</span></label><input type="radio" name="scale_serious_playful" id="scale_serious_playful-5" value="5"><label for="scale_serious_playful-5" title="5 of 5"><span class="sr">5</span></label></div><span>Playful</span></div><div class="bq-scale" role="radiogroup" aria-label="Premium to Accessible"><span>Premium</span><div class="bq-dots"><input type="radio" name="scale_premium_accessible" id="scale_premium_accessible-1" value="1"><label for="scale_premium_accessible-1" title="1 of 5"><span class="sr">1</span></label><input type="radio" name="scale_premium_accessible" id="scale_premium_accessible-2" value="2"><label for="scale_premium_accessible-2" title="2 of 5"><span class="sr">2</span></label><input type="radio" name="scale_premium_accessible" id="scale_premium_accessible-3" value="3"><label for="scale_premium_accessible-3" title="3 of 5"><span class="sr">3</span></label><input type="radio" name="scale_premium_accessible" id="scale_premium_accessible-4" value="4"><label for="scale_premium_accessible-4" title="4 of 5"><span class="sr">4</span></label><input type="radio" name="scale_premium_accessible" id="scale_premium_accessible-5" value="5"><label for="scale_premium_accessible-5" title="5 of 5"><span class="sr">5</span></label></div><span>Accessible</span></div><div class="bq-scale" role="radiogroup" aria-label="Subtle to Bold"><span>Subtle</span><div class="bq-dots"><input type="radio" name="scale_subtle_bold" id="scale_subtle_bold-1" value="1"><label for="scale_subtle_bold-1" title="1 of 5"><span class="sr">1</span></label><input type="radio" name="scale_subtle_bold" id="scale_subtle_bold-2" value="2"><label for="scale_subtle_bold-2" title="2 of 5"><span class="sr">2</span></label><input type="radio" name="scale_subtle_bold" id="scale_subtle_bold-3" value="3"><label for="scale_subtle_bold-3" title="3 of 5"><span class="sr">3</span></label><input type="radio" name="scale_subtle_bold" id="scale_subtle_bold-4" value="4"><label for="scale_subtle_bold-4" title="4 of 5"><span class="sr">4</span></label><input type="radio" name="scale_subtle_bold" id="scale_subtle_bold-5" value="5"><label for="scale_subtle_bold-5" title="5 of 5"><span class="sr">5</span></label></div><span>Bold</span></div></fieldset><div class="field bq-f"><label for="bq-three_words">Describe your brand in three words</label><input id="bq-three_words" name="three_words" type="text"></div></div>
+          </section>
+          <section class="bq-step" data-step="4" hidden aria-labelledby="bq-h4">
+            <p class="bq-count">Step 5 of 6</p>
+            <h2 class="cs-title" id="bq-h4">Look &amp; feel</h2>
+            <p class="sub" style="margin-top:8px">Your taste and references. There are no wrong answers.</p>
+            <div class="form-grid bq-grid"><fieldset class="field bq-f full bq-group" data-name="has_logo" data-req="1"><legend class="flabel">Do you already have a logo?<i aria-hidden="true">*</i></legend><div class="reason"><input type="radio" name="has_logo" id="bq-has_logo-0" value="No, I need a new logo"><label for="bq-has_logo-0">No, I need a new logo</label><input type="radio" name="has_logo" id="bq-has_logo-1" value="Yes, but it needs a redesign"><label for="bq-has_logo-1">Yes, but it needs a redesign</label><input type="radio" name="has_logo" id="bq-has_logo-2" value="Yes, keep it and build the brand around it"><label for="bq-has_logo-2">Yes, keep it and build the brand around it</label></div></fieldset><div class="field bq-f full"><label for="bq-current_feedback">If you have a logo, what do you like or dislike about it?</label><textarea id="bq-current_feedback" name="current_feedback" rows="4" placeholder="You can add a link to the files (Google Drive, WeTransfer…)."></textarea></div><fieldset class="field bq-f full bq-group" data-name="logo_style"><legend class="flabel">Logo styles you’re drawn to</legend><div class="reason"><input type="checkbox" name="logo_style" id="bq-logo_style-0" value="Name only (wordmark)"><label for="bq-logo_style-0">Name only (wordmark)</label><input type="checkbox" name="logo_style" id="bq-logo_style-1" value="Icon + name"><label for="bq-logo_style-1">Icon + name</label><input type="checkbox" name="logo_style" id="bq-logo_style-2" value="Monogram / initials"><label for="bq-logo_style-2">Monogram / initials</label><input type="checkbox" name="logo_style" id="bq-logo_style-3" value="Abstract symbol"><label for="bq-logo_style-3">Abstract symbol</label><input type="checkbox" name="logo_style" id="bq-logo_style-4" value="Emblem / badge"><label for="bq-logo_style-4">Emblem / badge</label><input type="checkbox" name="logo_style" id="bq-logo_style-5" value="Mascot / character"><label for="bq-logo_style-5">Mascot / character</label><input type="checkbox" name="logo_style" id="bq-logo_style-6" value="Not sure, you decide"><label for="bq-logo_style-6">Not sure, you decide</label></div></fieldset><div class="field bq-f full"><label for="bq-colours">Colours you like, dislike or must avoid</label><textarea id="bq-colours" name="colours" rows="4" placeholder="Include colours your competitors use, or colours with meaning in your market."></textarea></div><div class="field bq-f"><label for="bq-type_style">Fonts or styles you like</label><input id="bq-type_style" name="type_style" type="text" placeholder="Clean and modern, elegant serif, handwritten…"></div><div class="field bq-f full"><label for="bq-brands_like">Brands or logos you admire, and why</label><textarea id="bq-brands_like" name="brands_like" rows="4"></textarea></div><div class="field bq-f full"><label for="bq-brands_dislike">Brands or logos you dislike, and why</label><textarea id="bq-brands_dislike" name="brands_dislike" rows="4"></textarea></div></div>
+          </section>
+          <section class="bq-step" data-step="5" hidden aria-labelledby="bq-h5">
+            <p class="bq-count">Step 6 of 6</p>
+            <h2 class="cs-title" id="bq-h5">The project</h2>
+            <p class="sub" style="margin-top:8px">Scope, timing and practical details.</p>
+            <div class="form-grid bq-grid"><fieldset class="field bq-f full bq-group" data-name="needs" data-req="1"><legend class="flabel">What do you need?<i aria-hidden="true">*</i></legend><div class="reason"><input type="checkbox" name="needs" id="bq-needs-0" value="Brand strategy &amp; positioning"><label for="bq-needs-0">Brand strategy &amp; positioning</label><input type="checkbox" name="needs" id="bq-needs-1" value="Logo"><label for="bq-needs-1">Logo</label><input type="checkbox" name="needs" id="bq-needs-2" value="Colours &amp; typography"><label for="bq-needs-2">Colours &amp; typography</label><input type="checkbox" name="needs" id="bq-needs-3" value="Brand guidelines"><label for="bq-needs-3">Brand guidelines</label><input type="checkbox" name="needs" id="bq-needs-4" value="Packaging or labels"><label for="bq-needs-4">Packaging or labels</label><input type="checkbox" name="needs" id="bq-needs-5" value="Stationery"><label for="bq-needs-5">Stationery</label><input type="checkbox" name="needs" id="bq-needs-6" value="Social media templates"><label for="bq-needs-6">Social media templates</label><input type="checkbox" name="needs" id="bq-needs-7" value="Signage, vehicles or uniforms"><label for="bq-needs-7">Signage, vehicles or uniforms</label><input type="checkbox" name="needs" id="bq-needs-8" value="Website design"><label for="bq-needs-8">Website design</label><input type="checkbox" name="needs" id="bq-needs-9" value="Not sure, let’s discuss"><label for="bq-needs-9">Not sure, let’s discuss</label></div></fieldset><fieldset class="field bq-f full bq-group" data-name="usage"><legend class="flabel">Where will the brand be used?</legend><div class="reason"><input type="checkbox" name="usage" id="bq-usage-0" value="Social media"><label for="bq-usage-0">Social media</label><input type="checkbox" name="usage" id="bq-usage-1" value="Website"><label for="bq-usage-1">Website</label><input type="checkbox" name="usage" id="bq-usage-2" value="Packaging"><label for="bq-usage-2">Packaging</label><input type="checkbox" name="usage" id="bq-usage-3" value="Print (cards, flyers)"><label for="bq-usage-3">Print (cards, flyers)</label><input type="checkbox" name="usage" id="bq-usage-4" value="App / software"><label for="bq-usage-4">App / software</label><input type="checkbox" name="usage" id="bq-usage-5" value="Clothing &amp; merchandise"><label for="bq-usage-5">Clothing &amp; merchandise</label><input type="checkbox" name="usage" id="bq-usage-6" value="Signage &amp; vehicles"><label for="bq-usage-6">Signage &amp; vehicles</label></div></fieldset><fieldset class="field bq-f full bq-group" data-name="languages"><legend class="flabel">Which languages must the brand work in?</legend><div class="reason"><input type="radio" name="languages" id="bq-languages-0" value="English"><label for="bq-languages-0">English</label><input type="radio" name="languages" id="bq-languages-1" value="French"><label for="bq-languages-1">French</label><input type="radio" name="languages" id="bq-languages-2" value="Both"><label for="bq-languages-2">Both</label></div></fieldset><div class="field bq-f"><label for="bq-deadline">Ideal deadline or launch date</label><input id="bq-deadline" name="deadline" type="date"></div><div class="field bq-f"><label for="bq-budget">Budget range (FCFA)</label><input id="bq-budget" name="budget" type="text" placeholder="Helps me recommend the right scope"></div><div class="field bq-f"><label for="bq-approver">Who will approve the final design?</label><input id="bq-approver" name="approver" type="text" placeholder="You, a partner, a board…"></div><div class="field bq-f full"><label for="bq-notes">Anything else I should know?</label><textarea id="bq-notes" name="notes" rows="4" placeholder="Ideas, requirements, things to avoid…"></textarea></div><fieldset class="field bq-f full bq-group" data-name="heard"><legend class="flabel">How did you hear about me?</legend><div class="reason"><input type="radio" name="heard" id="bq-heard-0" value="Referral"><label for="bq-heard-0">Referral</label><input type="radio" name="heard" id="bq-heard-1" value="Instagram"><label for="bq-heard-1">Instagram</label><input type="radio" name="heard" id="bq-heard-2" value="TikTok"><label for="bq-heard-2">TikTok</label><input type="radio" name="heard" id="bq-heard-3" value="Facebook"><label for="bq-heard-3">Facebook</label><input type="radio" name="heard" id="bq-heard-4" value="LinkedIn"><label for="bq-heard-4">LinkedIn</label><input type="radio" name="heard" id="bq-heard-5" value="Behance"><label for="bq-heard-5">Behance</label><input type="radio" name="heard" id="bq-heard-6" value="Google"><label for="bq-heard-6">Google</label><input type="radio" name="heard" id="bq-heard-7" value="Other"><label for="bq-heard-7">Other</label></div></fieldset></div>
+          </section>
+          <p id="bqError" class="small bq-error" role="alert" hidden></p>
+          <div class="bq-nav">
+            <button type="button" class="btn-sm dark" id="bqBack" hidden>← Back</button>
+            <button type="button" class="btn-sm" id="bqNext">Next →</button>
+            <button type="submit" class="btn-sm" id="bqSubmit" hidden>Send questionnaire →</button>
+          </div>
+          <p class="small bq-fine">Your answers go only to Clovis Nkwawir and are kept confidential.</p>
+        </form>
+        <div id="bqDone" class="bq-done" hidden>
+          <h2 class="cs-title" id="bqDoneTitle">Thank you.</h2>
+          <p class="sub" id="bqDoneText" style="margin-top:12px">Your questionnaire has been sent. I’ll review it and get back to you within 24–48 hours.</p>
+          <div class="bq-nav" style="justify-content:flex-start">
+            <a class="btn-sm" id="bqPdf" href="#" download="brand-questionnaire.pdf">Download a copy (PDF)</a>
+            <a class="btn-sm dark" href="#work">See my work</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2225,18 +2342,143 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openViewer(el);}});
   });
 
-  // inquiry form (test build: nothing is sent)
+  // inquiry form -> Netlify Forms
   var form=document.getElementById('inquiry');
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var err=document.getElementById('formError');
-    if(!form.checkValidity()){err.hidden=false;var bad=form.querySelector(':invalid');if(bad)bad.focus();return;}
+    if(!form.checkValidity()){err.textContent='Please fill in the fields marked with *.';err.hidden=false;var bad=form.querySelector(':invalid');if(bad)bad.focus();return;}
     err.hidden=true;
-    var name=(form.elements.name.value||'').trim().split(' ')[0];
-    document.getElementById('thanksTitle').textContent='Thanks, '+name+'.';
-    form.hidden=true;
-    var th=document.getElementById('thanks');th.hidden=false;th.scrollIntoView({block:'center'});
+    var btn=form.querySelector('[type=submit]'); btn.disabled=true;
+    var body=new URLSearchParams(new FormData(form)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}).then(function(r){
+      if(!r.ok)throw new Error(r.status);
+      var name=(form.elements.name.value||'').trim().split(' ')[0];
+      document.getElementById('thanksTitle').textContent='Thanks, '+name+'.';
+      form.hidden=true; var th=document.getElementById('thanks'); th.hidden=false; th.scrollIntoView({block:'center'});
+    }).catch(function(){
+      btn.disabled=false;
+      err.innerHTML='Your message could not be sent. Please email <a href="mailto:clovis.nkwawir@gmail.com">clovis.nkwawir@gmail.com</a> or message me on <a href="https://wa.me/237658511165" target="_blank" rel="noopener">WhatsApp</a>.';
+      err.hidden=false;
+    });
   });
+
+  // brand questionnaire: steps, autosave, PDF copy, Netlify Forms submission
+  (function(){
+    var f=document.getElementById('bqForm'); if(!f)return;
+    var steps=[].slice.call(f.querySelectorAll('.bq-step')), at=0, KEY='cn-brief-draft';
+    var back=document.getElementById('bqBack'), next=document.getElementById('bqNext'), send=document.getElementById('bqSubmit'), err=document.getElementById('bqError'), bar=document.getElementById('bqBar');
+    function show(i){
+      at=i; steps.forEach(function(s,k){s.hidden=k!==i;});
+      back.hidden=i===0; next.hidden=i===steps.length-1; send.hidden=i!==steps.length-1;
+      bar.style.width=((i+1)/steps.length*100)+'%'; err.hidden=true;
+    }
+    function top(){var c=f.closest('.bq-card'); var y=c.getBoundingClientRect().top+window.scrollY-20; window.scrollTo(0,y);}
+    function check(i){
+      var st=steps[i], bad=null;
+      st.querySelectorAll('input[required],textarea[required]').forEach(function(el){ if(!bad&&!el.value.trim())bad=el; if(!bad&&el.type==='email'&&!el.checkValidity())bad=el; });
+      st.querySelectorAll('[data-req]').forEach(function(g){ if(!bad&&!g.querySelector('input:checked'))bad=g.querySelector('input'); });
+      if(bad){err.textContent='Please answer the questions marked with *.'; err.hidden=false; bad.focus(); return false;}
+      return true;
+    }
+    next.addEventListener('click',function(){ if(!check(at))return; show(at+1); top(); });
+    back.addEventListener('click',function(){ show(at-1); top(); });
+    f.querySelectorAll('[data-max]').forEach(function(g){
+      var mx=+g.getAttribute('data-max');
+      g.addEventListener('change',function(ev){ if(g.querySelectorAll('input:checked').length>mx){ev.target.checked=false;} });
+    });
+    // answers
+    function collect(){
+      var out=[];
+      steps.forEach(function(st){
+        var sec={title:st.querySelector('h2').textContent, items:[]};
+        st.querySelectorAll('.bq-f').forEach(function(b){
+          var q=(b.querySelector('label,legend').childNodes[0]||{}).textContent||'';
+          if(b.querySelector('.bq-scale')){
+            b.querySelectorAll('.bq-scale').forEach(function(r){
+              var sp=r.querySelectorAll(':scope > span'), c=r.querySelector('input:checked');
+              sec.items.push({q:sp[0].textContent+' / '+sp[1].textContent, a:c?(c.value+' of 5 ('+sp[0].textContent+' 1 - 5 '+sp[1].textContent+')'):''});
+            });
+            return;
+          }
+          var ins=b.querySelectorAll('input,textarea'), vals=[];
+          ins.forEach(function(el){ if(el.type==='radio'||el.type==='checkbox'){ if(el.checked)vals.push(el.value); } else if(el.value.trim()) vals.push(el.value.trim()); });
+          sec.items.push({q:q.trim(), a:vals.join(', ')});
+        });
+        out.push(sec);
+      });
+      return out;
+    }
+    // draft autosave (this device only)
+    function save(){ try{ var d={}; [].forEach.call(f.elements,function(el){ if(!el.name||el.type==='file'||el.type==='hidden'||el.name==='bot-field')return; if(el.type==='radio'||el.type==='checkbox'){ if(el.checked)(d[el.name]=d[el.name]||[]).push(el.value); } else d[el.name]=el.value; }); localStorage.setItem(KEY,JSON.stringify(d)); }catch(x){} }
+    function load(){ try{ var d=JSON.parse(localStorage.getItem(KEY)||'null'); if(!d)return; [].forEach.call(f.elements,function(el){ if(!(el.name in d))return; if(el.type==='radio'||el.type==='checkbox') el.checked=d[el.name].indexOf(el.value)>-1; else if(el.type!=='file'&&el.type!=='hidden') el.value=d[el.name]; }); }catch(x){} }
+    load(); f.addEventListener('input',save); f.addEventListener('change',save);
+    // PDF
+    function loadJsPDF(){ return new Promise(function(res,rej){ if(window.jspdf)return res(window.jspdf); var sc=document.createElement('script'); sc.src='js/jspdf.umd.min.js'; sc.onload=function(){res(window.jspdf);}; sc.onerror=rej; document.head.appendChild(sc); }); }
+    function clean(t){ return String(t||'').replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/…/g,'...').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,''); }
+    function makePdf(data){
+      return loadJsPDF().then(function(lib){
+        var doc=new lib.jsPDF({unit:'mm',format:'a4'}), W=210, M=18, y=0, maxW=W-2*M;
+        var brand=clean(f.elements.brand_name.value)||'Brand', date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+        doc.setFillColor(31,77,58); doc.rect(0,0,W,38,'F');
+        doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.text('Brand Questionnaire',M,18);
+        doc.setFont('helvetica','normal'); doc.setFontSize(11); doc.text(brand+'  |  '+date,M,27);
+        doc.setFontSize(9); doc.text('Clovis Nkwawir - Brand Designer',W-M,27,{align:'right'});
+        y=50;
+        function need(h){ if(y+h>282){ doc.addPage(); y=20; } }
+        data.forEach(function(sec){
+          need(16); doc.setTextColor(31,77,58); doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(clean(sec.title).toUpperCase(),M,y);
+          y+=2; doc.setDrawColor(31,77,58); doc.setLineWidth(.4); doc.line(M,y,W-M,y); y+=7;
+          sec.items.forEach(function(it){
+            var q=doc.setFont('helvetica','bold').setFontSize(9.5).splitTextToSize(clean(it.q),maxW);
+            var a=doc.setFont('helvetica','normal').setFontSize(10.5).splitTextToSize(clean(it.a)||'-',maxW);
+            need(q.length*4.4+Math.min(a.length,4)*5+4);
+            doc.setTextColor(90,90,90); doc.setFont('helvetica','bold'); doc.setFontSize(9.5); doc.text(q,M,y); y+=q.length*4.4+1;
+            doc.setTextColor(20,20,20); doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+            a.forEach(function(line){ need(5); doc.text(line,M,y); y+=5; });
+            y+=4;
+          });
+          y+=3;
+        });
+        var n=doc.getNumberOfPages(); for(var i=1;i<=n;i++){ doc.setPage(i); doc.setFontSize(8); doc.setTextColor(140,140,140); doc.text('clovisnkwawir.netlify.app  |  clovis.nkwawir@gmail.com',M,290); doc.text(i+' / '+n,W-M,290,{align:'right'}); }
+        return doc.output('blob');
+      });
+    }
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      if(!check(at))return;
+      for(var i=0;i<steps.length;i++){ if(!check(i)){ show(i); check(i); top(); return; } }
+      send.disabled=true; send.textContent='Sending…';
+      var data=collect(), slug=(f.elements.brand_name.value||'brand').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'brand', fname='brand-questionnaire-'+slug+'.pdf', pdf=null;
+      makePdf(data).catch(function(){return null;}).then(function(blob){
+        pdf=blob;
+        var fd=new FormData();
+        fd.append('form-name','brand-brief'); fd.append('bot-field',f.elements['bot-field'].value);
+        var seen={};
+        [].forEach.call(f.elements,function(el){ if(!el.name||seen[el.name]||el.name==='form-name'||el.name==='bot-field'||el.type==='file')return; seen[el.name]=1;
+          var v; if(el.type==='radio'||el.type==='checkbox'){ v=[].map.call(f.querySelectorAll('input[name="'+el.name+'"]:checked'),function(x){return x.value;}).join(', '); } else v=el.value.trim();
+          fd.append(el.name,v); });
+        if(blob) fd.append('brief_pdf',new File([blob],fname,{type:'application/pdf'}));
+        return fetch('/',{method:'POST',body:fd});
+      }).then(function(r){
+        if(!r.ok)throw new Error(r.status);
+        try{localStorage.removeItem(KEY);}catch(x){}
+        done(true);
+      }).catch(function(){ done(false); });
+      function done(ok){
+        var link=document.getElementById('bqPdf');
+        if(pdf){ link.href=URL.createObjectURL(pdf); link.setAttribute('download',fname); } else link.hidden=true;
+        var first=(f.elements.name.value||'').trim().split(' ')[0];
+        if(ok){ document.getElementById('bqDoneTitle').textContent='Thank you, '+first+'.'; }
+        else{
+          document.getElementById('bqDoneTitle').textContent='Almost there.';
+          document.getElementById('bqDoneText').innerHTML='Your answers could not be sent from this page. Please download the PDF below and send it to <a href="mailto:clovis.nkwawir@gmail.com">clovis.nkwawir@gmail.com</a> or on <a href="https://wa.me/237658511165" target="_blank" rel="noopener">WhatsApp</a>.';
+        }
+        f.hidden=true; document.getElementById('bqDone').hidden=false; top();
+      }
+    });
+    show(0);
+  })();
 })();
 </script>
 
