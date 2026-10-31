@@ -503,6 +503,42 @@ body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
 :root[data-theme="light"] .watch img{filter:brightness(0)}
 :root[data-theme="light"] .closing[style*="#fff"]{color:var(--ink)!important}
 
+/* ---------- PROJECT PAGES: lookbook layout ---------- */
+.sec>.sec-bg.pj-bg{display:none!important}
+.pj-facts{display:none}
+.pj-hero{display:flex!important;flex-direction:column;align-items:stretch;gap:clamp(28px,3vw,52px)}
+.pj-hero>img{order:-1;align-self:center;justify-self:auto;width:auto;max-width:100%;max-height:min(680px,76vh);border-radius:14px}
+.pj-hero>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,6vw,120px);align-items:start}
+.pj-hero>div>*{grid-column:1}
+.pj-hero>div>.h1{margin-top:0}
+.pj-hero>div>.pj-intro{grid-column:2;grid-row:1 / span 4;margin-top:6px;max-width:none}
+.pj-scope{margin-top:clamp(28px,3vw,48px);grid-template-columns:minmax(0,2.2fr) minmax(0,1fr) minmax(0,.6fr) minmax(0,1fr);gap:18px 32px;padding:22px clamp(20px,2.4vw,36px);font-size:16px}
+.pj-scope>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pj-scope b{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pj-scope span{color:var(--ink);line-height:1.45}
+.pj-split:has(.pj-fig){grid-template-columns:minmax(0,1fr);justify-content:stretch;gap:clamp(24px,2.6vw,44px)}
+.pj-split:has(.pj-fig)>.pj-fig{order:-1}
+.pj-split:has(.pj-fig)>.copy{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:clamp(32px,6vw,120px);row-gap:16px;align-items:start}
+.pj-split:has(.pj-fig)>.copy>*{grid-column:2;margin-top:0}
+.pj-split:has(.pj-fig)>.copy>.cs-title{grid-column:1;grid-row:1 / span 6}
+.pj-fig img{display:block;width:auto;max-width:100%;max-height:min(760px,82vh);margin-inline:auto}
+.pj-split .pj-fig img{max-height:min(600px,74vh)}
+.pj-gallery{gap:14px}
+.pj-gallery img{flex:none}
+.pj-gallery.c1{justify-content:center}
+.pj-gallery.c1 img{width:auto!important;max-width:100%;max-height:min(760px,82vh)}
+.pj-ct{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,72px);align-items:center}
+.pj-ct .pj-swatches{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%}
+.pj-ct .pj-sw .chip{aspect-ratio:3/2}
+@media (max-width:900px){
+  .pj-hero>div,.pj-split:has(.pj-fig)>.copy,.pj-ct{grid-template-columns:minmax(0,1fr)}
+  .pj-hero>div>.pj-intro{grid-column:1;grid-row:auto;margin-top:18px}
+  .pj-split:has(.pj-fig)>.copy>*,.pj-split:has(.pj-fig)>.copy>.cs-title{grid-column:1;grid-row:auto}
+  .pj-scope{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pj-scope>div:first-child{grid-column:1 / -1}
+  .pj-hero>img{max-height:none}
+}
+
 @media (min-width:761px){#workGrid>.tile.solo{grid-column:2}}
 
 /* ---------- WOW catalog section + page viewer ---------- */
@@ -1111,7 +1147,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         <a href="#work/penven-breeze" class="tile" data-tags="identity applications digital"><img class="img" src="img/w/penven-breeze-cover.webp" alt="PenVen Breeze logo in gold on deep navy" width="800" height="524" loading="lazy"><div class="name">PenVen Breeze</div><div class="cat">Luxury Apartments</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
         <a href="#work/facyas" class="tile" data-tags="identity packaging"><img class="img" src="img/w/facyas-cover.webp" alt="FACYAS Turmeric collection" width="800" height="524" loading="lazy"><div class="name">FACYAS Beauty</div><div class="cat">Skincare</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
         <a href="#work/m2k-foundation" class="tile" data-tags="identity print applications"><img class="img" src="img/w/m2k-foundation-cover.webp" alt="M2K Foundation" width="800" height="524" loading="lazy"><div class="name">M2K Foundation</div><div class="cat">Foundation • NGO</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
-        <a href="#work/everything-hair" class="tile" data-tags="identity packaging applications digital"><img class="img" src="img/w/everything-hair-cover.webp" alt="Everything Hair by Chelsea model holding branded shopping bags" width="800" height="524" loading="lazy"><div class="name">Everything Hair by Chelsea</div><div class="cat">Beauty • Hair</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
+        <a href="#work/everything-hair" class="tile" data-tags="identity packaging applications digital"><img class="img" src="img/w/everything-hair-cover2.webp" alt="Everything Hair by Chelsea model holding branded shopping bags" width="800" height="524" loading="lazy"><div class="name">Everything Hair by Chelsea</div><div class="cat">Beauty • Hair</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
         <a href="#work/geotec-kumba" class="tile" data-tags="print applications"><img class="img" src="img/w/geotec-kumba-cover.webp" alt="GEOTEC and GINAPS admissions brochure" width="800" height="524" loading="lazy"><div class="name">GEOTEC Kumba</div><div class="cat">Education</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
         <a href="#work/beaufort" class="tile" data-tags="packaging"><img class="img" src="img/w/beaufort-cover.webp" alt="Beaufort Lager bottle with the Africa in Motion label" width="800" height="524" loading="lazy"><div class="name">Beaufort Lager</div><div class="cat">Beverage</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
         <a href="#work/eden-juicery" class="tile" data-tags="identity packaging applications"><img class="img" src="img/w/eden-juicery-cover.webp" alt="Three Eden Juicery bottles on a rock" width="800" height="524" loading="lazy"><div class="name">Eden Juicery</div><div class="cat">Cold-pressed Juices</div><div class="rule"></div><div class="more">View Project &nbsp;→</div></a>
@@ -1159,7 +1195,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/keepay-hero.webp" alt="Keepay bus stop poster: Never miss a payment again" width="1600" height="1317" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo system • Brand guidelines • Pitch deck • Brand applications</span></div><div><b>Industry:</b> <span>&nbsp;Fintech • SaaS</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div><div><b>Client:</b> <span>&nbsp;Founder based in France</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo system • Brand guidelines • Pitch deck • Brand applications</span></div><div><b>Industry:</b> <span>Fintech • SaaS</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Designer</span></div><div><b>Client:</b> <span>Founder based in France</span></div></div>
       <div class="pj-facts n3"><div class="card pj-fact"><div class="n">16</div><p>logo files delivered across three lockups</p></div><div class="card pj-fact"><div class="n">12</div><p>slide investor pitch deck</p></div><div class="card pj-fact"><div class="n">2</div><p>product surfaces: web app and Chrome extension</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1217,7 +1253,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/kesho-hero.webp" alt="Kesho Studios billboard: Digital solutions. Real impact." width="1492" height="1054" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Naming • Logo system • Brand guidelines • Applications</span></div><div><b>Industry:</b> <span>&nbsp;Tech • Digital services</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Strategist &amp; Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Naming • Logo system • Brand guidelines • Applications</span></div><div><b>Industry:</b> <span>Tech • Digital services</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Strategist &amp; Designer</span></div></div>
       <div class="pj-facts n3"><div class="card pj-fact"><div class="n">6</div><p>name directions, each with its own positioning</p></div><div class="card pj-fact"><div class="n">5</div><p>logo variations in one flexible system</p></div><div class="card pj-fact"><div class="n">24</div><p>page brand guidelines</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1270,7 +1306,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/penven-breeze-hero.webp" alt="PenVen Breeze logo over a terrace view" width="1600" height="1200" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo system • Colour palette • Guest amenities • Website proposal</span></div><div><b>Industry:</b> <span>&nbsp;Hospitality • Real estate</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo system • Colour palette • Guest amenities • Website proposal</span></div><div><b>Industry:</b> <span>Hospitality • Real estate</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Designer</span></div></div>
       <div class="pj-facts n3"><div class="card pj-fact"><div class="n">3</div><p>logo lockups: crest, wordmark, monogram</p></div><div class="card pj-fact"><div class="n">4</div><p>brand colours</p></div><div class="card pj-fact"><div class="n">EST</div><p>2026 opening year built into the crest</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1318,7 +1354,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/facyas-hero.webp" alt="FACYAS Turmeric collection on wooden plinths" width="1600" height="1600" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo • Colour system • Labels • Gift kits • 3D product renders</span></div><div><b>Industry:</b> <span>&nbsp;Beauty • Skincare</span></div><div><b>Year:</b> <span>&nbsp;2025</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Packaging Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo • Colour system • Labels • Gift kits • 3D product renders</span></div><div><b>Industry:</b> <span>Beauty • Skincare</span></div><div><b>Year:</b> <span>2025</span></div><div><b>Role:</b> <span>Brand &amp; Packaging Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">4</div><p>collections: Turmeric, Lip, Perfectly, Glutathione &amp; Retinol</p></div><div class="card pj-fact"><div class="n">2</div><p>gift kits: anti-acne and anti-dark-spot</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1370,7 +1406,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/m2k-foundation-hero.webp" alt="M2K Foundation brochures for the education, health and social programmes" width="1600" height="1000" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Brand identity • Logo • Guidelines • Brochures • Reports • Website &amp; video</span></div><div><b>Sector:</b> <span>&nbsp;Non-profit • Education • Health</span></div><div><b>Years:</b> <span>&nbsp;2024–2025</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer &amp; Community Manager</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Brand identity • Logo • Guidelines • Brochures • Reports • Website &amp; video</span></div><div><b>Sector:</b> <span>Non-profit • Education • Health</span></div><div><b>Years:</b> <span>2024–2025</span></div><div><b>Role:</b> <span>Brand Designer &amp; Community Manager</span></div></div>
       <div class="pj-facts n3"><div class="card pj-fact"><div class="n">5</div><p>programme pillars, each with its own brochure</p></div><div class="card pj-fact"><div class="n">2</div><p>language versions of every brochure</p></div><div class="card pj-fact"><div class="n">3</div><p>languages for quarterly reports: French, English, Italian</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1398,7 +1434,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
 
 <div data-page="work/everything-hair" hidden>
   <section class="sec" style="padding-top:0">
-    <img class="sec-bg pj-bg" src="img/w/everything-hair-hero.webp" alt="" loading="lazy" style="top:120px;opacity:.16">
+    <img class="sec-bg pj-bg" src="img/w/everything-hair-hero2.webp" alt="" loading="lazy" style="top:120px;opacity:.16">
     <div class="wrap">
       <a href="#work" class="back-link">← All work</a>
       <div class="cs-hero pj-hero">
@@ -1407,26 +1443,27 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
           <p class="pj-tagline">A quiet-luxury identity for a premium wig brand.</p>
           <div class="body pj-intro"><p>Everything Hair by Chelsea sells premium wigs from Laurel, Maryland, under a simple promise: luxury hair for the confident you.</p><p>The brief was an identity that feels expensive without being loud, and that works as well on a shopping bag as on an Instagram profile.</p></div>
         </div>
-        <img data-zoom src="img/w/everything-hair-hero.webp" alt="Everything Hair by Chelsea model holding branded shopping bags" width="1536" height="1024" loading="lazy" decoding="async">
+        <img data-zoom src="img/w/everything-hair-hero2.webp" alt="Everything Hair by Chelsea model holding branded shopping bags" width="1536" height="1024" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo system • Monogram • Colour &amp; typography • Packaging • Social media</span></div><div><b>Industry:</b> <span>&nbsp;Beauty • Hair</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div></div>
-      <div class="pj-facts n2"><div class="card pj-fact"><div class="n">3</div><p>logo versions: primary, secondary and monogram</p></div><div class="card pj-fact"><div class="n">5</div><p>colours from espresso to rose</p></div></div>
-      <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo system • Monogram • Colour &amp; typography • Packaging • Social media</span></div><div><b>Industry:</b> <span>Beauty • Hair</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Designer</span></div></div>
+            <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
   </section>
   <section class="sec"><div class="narrow"><div class="split pj-split">
     <div class="copy"><h2 class="cs-title">The EH monogram</h2><p class="body" style="color:var(--mute)">The monogram locks an E inside an H, the two letters sharing a single stem. It works at the size of a sticker seal, a swing tag or a profile picture.</p><p class="body" style="color:var(--mute)">The wordmark pairs spaced capitals with a handwritten “by Chelsea”: the brand stays personal, the product stays premium.</p></div>
     <figure class="pj-fig"><img data-zoom src="img/w/everything-hair-b1.webp" alt="Everything Hair by Chelsea primary and secondary logos" width="1600" height="1132" loading="lazy" decoding="async"></figure>
   </div></div></section>
-  <section class="sec center pj-pal-sec"><div class="wrap center">
-    <h2 class="cs-title">Colour</h2>
-    <div class="pj-swatches n5"><div class="pj-sw"><div class="chip" style="background:#2B201D"></div><b>Espresso</b><span>#2B201D</span></div><div class="pj-sw"><div class="chip" style="background:#F9F5F0"></div><b>Cream</b><span>#F9F5F0</span></div><div class="pj-sw"><div class="chip" style="background:#5E2E12"></div><b>Caramel</b><span>#5E2E12</span></div><div class="pj-sw"><div class="chip" style="background:#D8C5A4"></div><b>Sand</b><span>#D8C5A4</span></div><div class="pj-sw"><div class="chip" style="background:#B96D7A"></div><b>Rose</b><span>#B96D7A</span></div></div>
-    <p class="sub" style="margin-top:24px;max-width:640px">Espresso and cream do most of the work; caramel, sand and a muted rose add warmth.</p>
-  </div></section>
+  <section class="sec"><div class="narrow"><div class="pj-ct">
+    <div><h2 class="cs-title">Colour &amp; type</h2><p class="sub" style="margin-top:16px">Espresso and cream do most of the work; caramel, sand and a muted rose add warmth. Canela Deck sets the headings, Manrope the text.</p><div class="pj-swatches n5"><div class="pj-sw"><div class="chip" style="background:#2B201D"></div><b>Espresso</b><span>#2B201D</span></div><div class="pj-sw"><div class="chip" style="background:#F9F5F0"></div><b>Cream</b><span>#F9F5F0</span></div><div class="pj-sw"><div class="chip" style="background:#5E2E12"></div><b>Caramel</b><span>#5E2E12</span></div><div class="pj-sw"><div class="chip" style="background:#D8C5A4"></div><b>Sand</b><span>#D8C5A4</span></div><div class="pj-sw"><div class="chip" style="background:#B96D7A"></div><b>Rose</b><span>#B96D7A</span></div></div></div>
+    <figure class="pj-fig"><img data-zoom src="img/w/everything-hair-g3.webp" alt="Everything Hair typography: Canela Deck and Manrope" width="1600" height="1132" loading="lazy" decoding="async"></figure>
+  </div></div></section>
   <section class="sec center"><div class="wrap center">
-    <h2 class="cs-title">Identity in use</h2>
-    <p class="sub" style="margin-top:20px;max-width:820px">Canela Deck for headings, Manrope for text. Kraft, black and satin carry the brand across packaging, tags, thank-you cards and the shopfront.</p>
-    <div class="pj-gallery c2"><img style="--r:1.4134" data-zoom src="img/w/everything-hair-g2.webp" alt="Everything Hair monogram and colour palette" width="1600" height="1132" loading="lazy" decoding="async"><img style="--r:1.4134" data-zoom src="img/w/everything-hair-g3.webp" alt="Everything Hair typography: Canela Deck and Manrope" width="1600" height="1132" loading="lazy" decoding="async"><img style="--r:1.4134" data-zoom src="img/w/everything-hair-g4.webp" alt="Everything Hair Instagram profile, gift box, thank-you card and swing tag" width="1600" height="1132" loading="lazy" decoding="async"><img style="--r:1.4134" data-zoom src="img/w/everything-hair-g5.webp" alt="Everything Hair sticker seal on patterned kraft paper" width="1600" height="1132" loading="lazy" decoding="async"><img style="--r:1.4134" data-zoom src="img/w/everything-hair-g6.webp" alt="Everything Hair sign on a shopfront" width="1600" height="1132" loading="lazy" decoding="async"><img style="--r:1.5000" data-zoom src="img/w/everything-hair-g7.webp" alt="Everything Hair by Chelsea campaign image" width="1536" height="1024" loading="lazy" decoding="async"></div>
+    <h2 class="cs-title">Packaging &amp; print</h2>
+    <p class="sub" style="margin-top:20px;max-width:820px">Kraft, black and satin carry the brand from the sticker seal and swing tag to the gift box, the thank-you card and the Instagram profile.</p>
+    <div class="pj-gallery"><img style="--r:1.7787" data-zoom src="img/w/everything-hair-sticker.webp" alt="Everything Hair round sticker seal on a kraft bag with the monogram pattern" width="1800" height="1012" loading="lazy" decoding="async"><img style="--r:1.5000" data-zoom src="img/w/everything-hair-thanks.webp" alt="Everything Hair thank-you cards on satin" width="1536" height="1024" loading="lazy" decoding="async"><img style="--r:1.2467" data-zoom src="img/w/everything-hair-tag.webp" alt="Everything Hair swing tag" width="1400" height="1123" loading="lazy" decoding="async"><img style="--r:1.2496" data-zoom src="img/w/everything-hair-box.webp" alt="Everything Hair black gift box with satin lining" width="1402" height="1122" loading="lazy" decoding="async"><img style="--r:1.4147" data-zoom src="img/w/everything-hair-ig.webp" alt="Everything Hair by Chelsea Instagram profile" width="1286" height="909" loading="lazy" decoding="async"></div>
+  </div></section>
+  <section class="sec center" style="padding-top:0"><div class="wrap center">
+    <div class="pj-gallery c1"><img style="--r:1.5004" data-zoom src="img/w/everything-hair-sign.webp" alt="Everything Hair by Chelsea sign on a shopfront" width="2000" height="1333" loading="lazy" decoding="async"></div>
   </div></section>
   <section class="sec center" style="padding-bottom:clamp(72px,7vw,130px)"><div class="wrap center">
     <nav class="pj-nav" aria-label="More projects">
@@ -1452,7 +1489,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/geotec-kumba-hero.webp" alt="GEOTEC and GINAPS prospectus, outside spread" width="1600" height="1150" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Prospectus • Information sheet • Roll-up banners • Uniform visuals</span></div><div><b>Sector:</b> <span>&nbsp;Education</span></div><div><b>Years:</b> <span>&nbsp;2025–2026</span></div><div><b>Role:</b> <span>&nbsp;Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Prospectus • Information sheet • Roll-up banners • Uniform visuals</span></div><div><b>Sector:</b> <span>Education</span></div><div><b>Years:</b> <span>2025–2026</span></div><div><b>Role:</b> <span>Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">2</div><p>schools in one visual family</p></div><div class="card pj-fact"><div class="n">2026/27</div><p>academic year intake</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1494,7 +1531,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/beaufort-hero.webp" alt="Beaufort Africa in Motion label and bottle, challenge board" width="1600" height="1468" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Label design • 3D bottle renders • Motion</span></div><div><b>Industry:</b> <span>&nbsp;Beverage</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Designer (challenge entry)</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Label design • 3D bottle renders • Motion</span></div><div><b>Industry:</b> <span>Beverage</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Designer (challenge entry)</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">0.33 L</div><p>bottle, 4.5% vol.</p></div><div class="card pj-fact"><div class="n">1</div><p>label, rendered and animated in 3D</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1532,7 +1569,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/eden-juicery-hero.webp" alt="Eden Juicery delivery backpack: Freshly pressed, delivered daily" width="1600" height="1067" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Wordmark &amp; monogram • Labels • Packaging • Signage &amp; print</span></div><div><b>Industry:</b> <span>&nbsp;Food &amp; beverage • Catering</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Wordmark &amp; monogram • Labels • Packaging • Signage &amp; print</span></div><div><b>Industry:</b> <span>Food &amp; beverage • Catering</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">12</div><p>flavour labels in one system</p></div><div class="card pj-fact"><div class="n">2</div><p>label versions: everyday and event-personalised</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1574,7 +1611,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/kaytouch-glow-hero.webp" alt="Kaytouch Glow body lotions: Hot Chocolate, Injection Lotion and Halfcast" width="1600" height="1333" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo • Label system • 3D product renders • Ads</span></div><div><b>Industry:</b> <span>&nbsp;Beauty • Skincare</span></div><div><b>Year:</b> <span>&nbsp;2024</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Packaging Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo • Label system • 3D product renders • Ads</span></div><div><b>Industry:</b> <span>Beauty • Skincare</span></div><div><b>Year:</b> <span>2024</span></div><div><b>Role:</b> <span>Brand &amp; Packaging Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">15+</div><p>product labels in one system</p></div><div class="card pj-fact"><div class="n">1</div><p>ingredient or flower per product</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1615,7 +1652,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/jk-wears-hero.webp" alt="JK Wears AFCON 2025 collection announcement" width="1400" height="1784" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo • Collection visuals • Launch campaigns • Foundation campaign</span></div><div><b>Industry:</b> <span>&nbsp;Fashion • Apparel</span></div><div><b>Years:</b> <span>&nbsp;2025–2026</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Visual Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo • Collection visuals • Launch campaigns • Foundation campaign</span></div><div><b>Industry:</b> <span>Fashion • Apparel</span></div><div><b>Years:</b> <span>2025–2026</span></div><div><b>Role:</b> <span>Brand &amp; Visual Designer</span></div></div>
       <div class="pj-facts n3"><div class="card pj-fact"><div class="n">30</div><p>African nations in the AFCON 2025 jacket collection</p></div><div class="card pj-fact"><div class="n">48</div><p>World Cup 2026 nations, one tracksuit each</p></div><div class="card pj-fact"><div class="n">200+</div><p>product visuals across the men’s and women’s ranges</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1656,7 +1693,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/acoms-hero.webp" alt="ACOMS letterhead and business cards" width="1600" height="1200" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo redesign • Logo system • Colour &amp; typography • Stationery • Brand guidelines</span></div><div><b>Industry:</b> <span>&nbsp;Real estate • Land development</span></div><div><b>Year:</b> <span>&nbsp;2026</span></div><div><b>Role:</b> <span>&nbsp;Brand Strategist &amp; Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo redesign • Logo system • Colour &amp; typography • Stationery • Brand guidelines</span></div><div><b>Industry:</b> <span>Real estate • Land development</span></div><div><b>Year:</b> <span>2026</span></div><div><b>Role:</b> <span>Brand Strategist &amp; Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">3</div><p>logo versions: primary, secondary and icon</p></div><div class="card pj-fact"><div class="n">2</div><p>core colours: deep navy and muted gold</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1702,7 +1739,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/set-organic-foods-hero.webp" alt="SET Organic Foods &amp; Spices logo" width="1600" height="447" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Merger logo • Colour • Pouch packaging • Labels</span></div><div><b>Industry:</b> <span>&nbsp;Food • Spices</span></div><div><b>Years:</b> <span>&nbsp;2023–2026</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Packaging Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Merger logo • Colour • Pouch packaging • Labels</span></div><div><b>Industry:</b> <span>Food • Spices</span></div><div><b>Years:</b> <span>2023–2026</span></div><div><b>Role:</b> <span>Brand &amp; Packaging Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">2</div><p>brands merged into one</p></div><div class="card pj-fact"><div class="n">10+</div><p>products on the new pouch system</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1756,7 +1793,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/dexsy-hero.webp" alt="Dexsy’s Hair Growth full product range, rendered in 3D" width="1600" height="1600" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo update • Label system • 3D product visuals • Campaigns</span></div><div><b>Industry:</b> <span>&nbsp;Beauty • Hair care</span></div><div><b>Years:</b> <span>&nbsp;2024–2026</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Packaging Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo update • Label system • 3D product visuals • Campaigns</span></div><div><b>Industry:</b> <span>Beauty • Hair care</span></div><div><b>Years:</b> <span>2024–2026</span></div><div><b>Role:</b> <span>Brand &amp; Packaging Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">10+</div><p>products in one label system</p></div><div class="card pj-fact"><div class="n">2024</div><p>working together since</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1819,7 +1856,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/aad-institut-hero.webp" alt="AAD-Institut flyer: Tu es infirmier? Travaille en Allemagne" width="1600" height="1600" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Campaign flyer • Tri-fold brochure</span></div><div><b>Sector:</b> <span>&nbsp;Education • International mobility</span></div><div><b>Year:</b> <span>&nbsp;2025</span></div><div><b>Role:</b> <span>&nbsp;Graphic Designer (via Romy Design)</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Campaign flyer • Tri-fold brochure</span></div><div><b>Sector:</b> <span>Education • International mobility</span></div><div><b>Year:</b> <span>2025</span></div><div><b>Role:</b> <span>Graphic Designer (via Romy Design)</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">5</div><p>German levels on the course grid, A1 to C1</p></div><div class="card pj-fact"><div class="n">3</div><p>offices shown: Yaoundé, Douala, Bafoussam</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1857,7 +1894,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/serene-hero.webp" alt="Serene shopping bags in white and black" width="1600" height="1067" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo • Label system • Shopping bags</span></div><div><b>Industry:</b> <span>&nbsp;Beauty • Skincare</span></div><div><b>Year:</b> <span>&nbsp;2023</span></div><div><b>Role:</b> <span>&nbsp;Brand &amp; Packaging Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo • Label system • Shopping bags</span></div><div><b>Industry:</b> <span>Beauty • Skincare</span></div><div><b>Year:</b> <span>2023</span></div><div><b>Role:</b> <span>Brand &amp; Packaging Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">7</div><p>product labels</p></div><div class="card pj-fact"><div class="n">2</div><p>bag versions: white and black</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1899,7 +1936,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/macrohan-hero.webp" alt="MRH stationery in red and white" width="1600" height="1200" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo system • Colour palette • Stationery • Vehicle &amp; uniform applications</span></div><div><b>Industry:</b> <span>&nbsp;Logistics • Trade</span></div><div><b>Year:</b> <span>&nbsp;2024</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo system • Colour palette • Stationery • Vehicle &amp; uniform applications</span></div><div><b>Industry:</b> <span>Logistics • Trade</span></div><div><b>Year:</b> <span>2024</span></div><div><b>Role:</b> <span>Brand Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">15+</div><p>applications, from pens to shipping containers</p></div><div class="card pj-fact"><div class="n">2</div><p>colours: signal red and black</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -1936,7 +1973,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
         </div>
         <img data-zoom src="img/w/cardinal-center-lodging-hero.webp" alt="Cardinal Center Lodging logo in gold on teal and in teal on cream" width="1600" height="1000" loading="lazy" decoding="async">
       </div>
-      <div class="card pj-scope"><div><b>Scope:</b> <span>&nbsp;Logo system • Colour versions • Official stamp • Announcement flyers</span></div><div><b>Industry:</b> <span>&nbsp;Hospitality</span></div><div><b>Year:</b> <span>&nbsp;2024</span></div><div><b>Role:</b> <span>&nbsp;Brand Designer</span></div></div>
+      <div class="card pj-scope"><div><b>Scope:</b> <span>Logo system • Colour versions • Official stamp • Announcement flyers</span></div><div><b>Industry:</b> <span>Hospitality</span></div><div><b>Year:</b> <span>2024</span></div><div><b>Role:</b> <span>Brand Designer</span></div></div>
       <div class="pj-facts n2"><div class="card pj-fact"><div class="n">3</div><p>colour versions: teal, gold, black</p></div><div class="card pj-fact"><div class="n">1</div><p>executive-management stamp</p></div></div>
       <p class="ia-hint" style="text-align:center;margin-top:18px">Tap or click any image to view it full size.</p>
     </div>
@@ -2224,6 +2261,25 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
   window.addEventListener('hashchange',route);
   route();
 
+
+  // project galleries: balanced justified rows, no orphan images
+  (function(){
+    function part(r,k){var n=r.length,P=[0];for(var i=0;i<n;i++)P.push(P[i]+r[i]);var avg=P[n]/k,INF=1e18,D=[],C=[];
+      for(var j=0;j<=k;j++){D.push([]);C.push([]);for(var i=0;i<=n;i++){D[j].push(INF);C[j].push(0)}}D[0][0]=0;
+      for(var j=1;j<=k;j++)for(var i=1;i<=n;i++)for(var m=j-1;m<i;m++){var d=P[i]-P[m]-avg,v=D[j-1][m]+d*d;if(v<D[j][i]){D[j][i]=v;C[j][i]=m}}
+      var rows=[],i=n;for(var j=k;j>0;j--){var m=C[j][i];rows.unshift([m,i]);i=m}return rows}
+    function lay(g){var W=g.clientWidth;if(!W)return;var imgs=[].slice.call(g.querySelectorAll(':scope>img'));if(!imgs.length)return;
+      var cs=getComputedStyle(g),gap=parseFloat(cs.columnGap)||14,h=parseFloat(cs.getPropertyValue('--h'))||300;
+      var r=imgs.map(function(im){return parseFloat(im.style.getPropertyValue('--r'))||(im.width/im.height)||1.5});
+      if(g.classList.contains('c1'))return;
+      var tot=r.reduce(function(a,b){return a+b},0),k=Math.max(1,Math.min(r.length,Math.round(tot*h/W)));
+      if(W<560)k=Math.max(k,Math.ceil(r.length/2));
+      part(r,k).forEach(function(row){var s=0;for(var i=row[0];i<row[1];i++)s+=r[i];var avail=W-gap*(row[1]-row[0]-1)-1;
+        for(var i=row[0];i<row[1];i++)imgs[i].style.width=Math.floor(avail*r[i]/s*100)/100+'px'})}
+    var gs=document.querySelectorAll('.pj-gallery');
+    if(window.ResizeObserver){var ro=new ResizeObserver(function(es){es.forEach(function(e){lay(e.target)})});gs.forEach(function(g){ro.observe(g)})}
+    else{var all=function(){gs.forEach(lay)};window.addEventListener('resize',all);window.addEventListener('hashchange',function(){setTimeout(all,50)});all()}
+  })();
   // light / dark theme
   var root=document.documentElement, themeBtn=document.getElementById('themeBtn');
   function syncThemeBtn(){var l=root.getAttribute('data-theme')==='light';themeBtn.setAttribute('aria-label',l?'Switch to dark mode':'Switch to light mode');themeBtn.setAttribute('aria-pressed',String(l));}
