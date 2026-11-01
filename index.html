@@ -539,6 +539,24 @@ body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
   .pj-hero>img{max-height:none}
 }
 
+/* ---------- reviews ---------- */
+.quote-grid>.quote:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;width:min(630px,100%)}
+.quote .who b{font-weight:700}
+.rv-more{margin-top:24px}
+.rv-cta{margin-top:clamp(28px,3vw,48px);display:flex;flex-direction:column;align-items:center;gap:16px}
+.rv-form{margin-top:24px;width:min(860px,100%);padding:clamp(22px,3vw,40px);text-align:left}
+.rv-grid{margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.rv-form .opt{color:var(--mute);font-size:14px}
+.rv-form textarea{height:150px}
+.rv-count{align-self:flex-end;font-size:13px;color:var(--mute);margin-top:-4px}
+.rv-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.rv-foot{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.rv-status{margin:0;font-size:15px;color:var(--mute)}
+.rv-status.err{color:#e07a6a}
+.quote.rv-new{animation:rvIn .5s ease}
+@keyframes rvIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:760px){.rv-grid{grid-template-columns:1fr}.rv-foot .btn-sm{width:100%}}
+
 @media (min-width:761px){#workGrid>.tile.solo{grid-column:2}}
 
 /* ---------- WOW catalog section + page viewer ---------- */
@@ -801,10 +819,23 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     <div class="wrap center">
       <h2 class="h2">What clients say after implementing<br>structured brand systems</h2>
       <p class="sub" style="margin-top:22px">I work with businesses preparing for growth, restructuring their brand presence, or improving their market positioning.</p>
-      <div class="quote-grid" style="width:100%">
+      <div class="quote-grid" id="rvGrid" style="width:100%">
         <figure class="card quote" style="margin:0"><img src="icons/quote.svg" alt=""><p>Clovis demonstrated a deep understanding of our vision from the very beginning. His ability to translate our direction into a structured brand system made the entire process smooth, and the final outcome exceeded our expectations.</p><figcaption class="who"><b>CEO</b><span>WOW Packaging</span></figcaption></figure>
         <figure class="card quote" style="margin:0"><img src="icons/quote.svg" alt=""><p>Our brand now reflects the professionalism of our operations. The structure and clarity brought to our identity has improved how we present ourselves to clients.</p><figcaption class="who"><b>CEO</b><span>Dexsy’s Hair Growth</span></figcaption></figure>
       </div>
+      <div id="rvMore" class="rv-more" hidden><button type="button" class="btn-sm dark" id="rvMoreBtn">Show more reviews</button></div>
+      <div class="rv-cta"><p class="sub">Worked with me? I’d love to hear how it went.</p><button type="button" class="btn-sm dark" id="rvOpen" aria-expanded="false" aria-controls="rvForm">Leave a review</button></div>
+      <form class="card rv-form" id="rvForm" hidden novalidate>
+        <h3 class="h3">Leave a review</h3>
+        <div class="rv-grid">
+          <div class="field"><label for="rvName">Your name <span class="opt">(optional)</span></label><input id="rvName" name="name" maxlength="80" autocomplete="name" placeholder="e.g. Jane Doe"></div>
+          <div class="field"><label for="rvRole">Your title *</label><input id="rvRole" name="role" required minlength="2" maxlength="80" autocomplete="organization-title" placeholder="e.g. CEO, Founder, Marketing Lead"></div>
+          <div class="field full"><label for="rvCompany">Company / brand *</label><input id="rvCompany" name="company" required minlength="2" maxlength="100" autocomplete="organization" placeholder="e.g. WOW Packaging"></div>
+          <div class="field full"><label for="rvBody">Your review *</label><textarea id="rvBody" name="body" required minlength="20" maxlength="600" placeholder="How was working together, and what changed for your business?"></textarea><span class="rv-count" id="rvCount">0 / 600</span></div>
+          <input type="text" name="website" id="rvHp" tabindex="-1" autocomplete="off" aria-hidden="true" class="rv-hp">
+        </div>
+        <div class="rv-foot"><p class="rv-status" id="rvStatus" role="status"></p><button type="submit" class="btn-sm" id="rvSubmit">Publish review</button></div>
+      </form>
       <p class="sub" style="margin-top:clamp(36px,4.1vw,79px)">Businesses typically engage my services when preparing for growth, improving credibility, or strengthening their market positioning.</p>
       <a href="#contact" class="btn-sm" style="margin-top:clamp(20px,2.1vw,41px)">Discuss Your Brand Development Needs &nbsp;→</a>
     </div>
@@ -2279,6 +2310,36 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     var gs=document.querySelectorAll('.pj-gallery');
     if(window.ResizeObserver){var ro=new ResizeObserver(function(es){es.forEach(function(e){lay(e.target)})});gs.forEach(function(g){ro.observe(g)})}
     else{var all=function(){gs.forEach(lay)};window.addEventListener('resize',all);window.addEventListener('hashchange',function(){setTimeout(all,50)});all()}
+  })();
+
+  // reviews: stored in Supabase, shown in the same card style as the client quotes
+  (function(){
+    var URL='https://gxiyluzvxzyglocbgssm.supabase.co/rest/v1/reviews',KEY='sb_publishable_4lmmg8gAOr8dwfl5Sp5Thw_NVfFxFMo';
+    var H={'apikey':KEY,'Content-Type':'application/json'};
+    var grid=document.getElementById('rvGrid'),form=document.getElementById('rvForm'),open=document.getElementById('rvOpen');
+    if(!grid||!form)return;
+    var more=document.getElementById('rvMore'),moreBtn=document.getElementById('rvMoreBtn'),status=document.getElementById('rvStatus'),btn=document.getElementById('rvSubmit');
+    var body=document.getElementById('rvBody'),count=document.getElementById('rvCount'),SHOW=4;
+    function card(r,isNew){var f=document.createElement('figure');f.className='card quote'+(isNew?' rv-new':'');f.style.margin='0';
+      var q=document.createElement('img');q.src='icons/quote.svg';q.alt='';f.appendChild(q);
+      var p=document.createElement('p');p.textContent=r.body;f.appendChild(p);
+      var c=document.createElement('figcaption');c.className='who';var b=document.createElement('b');b.textContent=r.name?r.name+', '+r.role:r.role;var sp=document.createElement('span');sp.textContent=r.company;c.appendChild(b);c.appendChild(sp);f.appendChild(c);return f}
+    fetch(URL+'?select=name,role,company,body&order=created_at.desc&limit=50',{headers:H}).then(function(r){return r.ok?r.json():[]}).then(function(rows){
+      rows.forEach(function(r,i){var f=card(r);if(i>=SHOW){f.hidden=true;f.classList.add('rv-extra')}grid.appendChild(f)});
+      if(rows.length>SHOW)more.hidden=false}).catch(function(){});
+    moreBtn.addEventListener('click',function(){grid.querySelectorAll('.rv-extra').forEach(function(f){f.hidden=false});more.hidden=true});
+    open.addEventListener('click',function(){var o=form.hidden;form.hidden=!o;open.setAttribute('aria-expanded',String(o));if(o)document.getElementById('rvName').focus()});
+    body.addEventListener('input',function(){count.textContent=body.value.length+' / 600'});
+    form.addEventListener('submit',function(e){e.preventDefault();status.className='rv-status';
+      var d={name:form.elements.name.value.trim()||null,role:form.elements.role.value.trim(),company:form.elements.company.value.trim(),body:form.elements.body.value.trim()};
+      if(form.elements.website.value){status.textContent='Thank you!';return}
+      if(d.role.length<2||d.company.length<2){status.className='rv-status err';status.textContent='Please add your title and company.';return}
+      if(d.body.length<20){status.className='rv-status err';status.textContent='Please write at least a couple of sentences (20+ characters).';return}
+      btn.disabled=true;status.textContent='Publishing…';
+      fetch(URL,{method:'POST',headers:Object.assign({'Prefer':'return=minimal'},H),body:JSON.stringify(d)}).then(function(r){
+        if(!r.ok)throw 0;var f=card(d,true);grid.insertBefore(f,grid.children[2]||null);
+        form.reset();count.textContent='0 / 600';form.hidden=true;open.setAttribute('aria-expanded','false');open.textContent='Thank you for your review!';open.disabled=true;
+        f.scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){status.className='rv-status err';status.textContent='Something went wrong. Please try again in a moment.'}).then(function(){btn.disabled=false})});
   })();
   // light / dark theme
   var root=document.documentElement, themeBtn=document.getElementById('themeBtn');
