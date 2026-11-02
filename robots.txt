@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clovisnkwawir.com/sitemap.xml
