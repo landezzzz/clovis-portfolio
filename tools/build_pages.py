@@ -66,7 +66,7 @@ def translate(chunk):
     parts = re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<svg\b.*?</svg>)', chunk, flags=re.S)
     for i in range(0, len(parts), 2):
         parts[i] = re.sub(r'>([^<>]+)<', tnode, parts[i])
-        parts[i] = re.sub(r'\b(placeholder|aria-label)="([^"]*)"', tattr, parts[i])
+        parts[i] = re.sub(r'\b(placeholder|aria-label|alt)="([^"]*)"', tattr, parts[i])
     return ''.join(parts)
 
 def build(page, fr=False):
@@ -92,7 +92,11 @@ def build(page, fr=False):
         hs, he = doc.index('<header'), doc.index('</header>')
         fs, fe = doc.index('<footer'), doc.index('</footer>')
         ps = doc.index('<div data-page=')
-        doc = doc[:hs] + translate(doc[hs:he]) + doc[he:ps] + translate(doc[ps:fs]) + translate(doc[fs:fe]) + doc[fe:]
+        tail_js = doc[fe:]
+        for en, frs in FRD.get('js', []):
+            tail_js = tail_js.replace(en, frs)
+        doc = doc[:hs] + translate(doc[hs:he]) + doc[he:ps] + translate(doc[ps:fs]) + translate(doc[fs:fe]) + translate(tail_js)
+        # shared viewers (lightbox, catalog, video) sit after the footer: translate their labels too
         for p in FR_PAGES:
             doc = doc.replace(f'<a href="{path(p)}"', f'<a href="{path(p, True)}"').replace(f' href="{path(p)}" class=', f' href="{path(p, True)}" class=')
             doc = re.sub(rf'(<a\b[^>]*?) href="{re.escape(path(p))}"', lambda m: m.group(1) + f' href="{path(p, True)}"', doc)
