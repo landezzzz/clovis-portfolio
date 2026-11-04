@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'dist')
 SITE = 'https://clovisnkwawir.com'
 NOINDEX = {'brief'}
-COPY = ['img', 'icons', 'fonts', 'js', 'docs', 'robots.txt']
+COPY = ['img', 'icons', 'fonts', 'js', 'docs', 'robots.txt', 'favicon.ico']
 
 src = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 FRD = json.load(open(os.path.join(ROOT, 'tools', 'fr.json'), encoding='utf-8'))
