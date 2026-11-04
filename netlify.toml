@@ -1,5 +1,16 @@
 [build]
   publish = "."
+  command = "python3 tools/build_pages.py"
+
+[[redirects]]
+  from = "/questionnaire"
+  to = "/brief/"
+  status = 301
+
+[[redirects]]
+  from = "/questionnaire/*"
+  to = "/brief/"
+  status = 301
 
 [[headers]]
   for = "/img/*"
