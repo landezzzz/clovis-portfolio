@@ -1,5 +1,5 @@
 [build]
-  publish = "."
+  publish = "dist"
   command = "python3 tools/build_pages.py"
 
 [[redirects]]

@@ -465,6 +465,10 @@ button{font:inherit}
 /* ---------- THEMES: brand pattern across the whole page, light mode ---------- */
 :root{--pat:url(img/pattern-dark-v3.webp)}
 body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
+.lang-btn{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;height:48px;margin-left:clamp(12px,1.4vw,24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;color:#fff;font-size:15px;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:border-color .2s}
+.lang-btn:hover{border-color:#fff}
+.site-header .lang-btn+.theme-btn{margin-left:-12px!important}
+@media (max-width:1080px){.site-header .lang-btn{margin-left:auto}.site-header .lang-btn+.theme-btn{margin-left:10px}}
 .theme-btn{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;height:48px;margin-left:clamp(12px,1.4vw,24px);padding:0;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:#fff;cursor:pointer;transition:border-color .2s}
 .theme-btn:hover{border-color:#fff}
 /* icon shows the mode you switch TO: sun in dark mode, moon in light mode */
@@ -483,7 +487,7 @@ body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
   --surface:rgba(46,49,52,.88); --card:rgba(46,49,52,.82);
 }
 /* charcoal islands: soft grey-charcoal, slightly see-through so the pattern breathes */
-:root[data-theme="light"] :is(.card,.solid,.btn-sm.dark,.menu-btn,.theme-btn,.statbar,.tile,.site-footer,.chip-box,.lb,.filters,.pj-chips span){
+:root[data-theme="light"] :is(.card,.solid,.btn-sm.dark,.menu-btn,.theme-btn,.lang-btn,.statbar,.tile,.site-footer,.chip-box,.lb,.filters,.pj-chips span){
   --ink:#ffffff; --ink2:#f4f4f4; --mute:#b4b7ba; --line:rgba(255,255,255,.12); --line-soft:rgba(255,255,255,.14); --accent:#4fa883;
   color:var(--ink);
 }
@@ -492,7 +496,7 @@ body{background:var(--pat) top center/1920px auto repeat,var(--bg)}
   box-shadow:0 1px 2px rgba(20,22,24,.06),0 8px 24px -12px rgba(20,22,24,.25);
 }
 /* small controls a step lighter than the cards */
-:root[data-theme="light"] :is(.btn-sm.dark,.menu-btn,.theme-btn){--surface:rgba(66,70,74,.9)}
+:root[data-theme="light"] :is(.btn-sm.dark,.menu-btn,.theme-btn,.lang-btn){--surface:rgba(66,70,74,.9)}
 :root[data-theme="light"] :is(.menu-btn,.theme-btn):hover{border-color:rgba(255,255,255,.45)}
 :root[data-theme="light"] .tile:hover{border-color:rgba(255,255,255,.35)}
 :root[data-theme="light"] .site-footer{--surface:#2e3134}
@@ -743,7 +747,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
       <a href="/contact/" class="btn menu-extra" style="font-size:20px;min-width:0;width:100%">Get in touch</a>
     </nav>
     <a href="/contact/" class="btn nav-cta">Get in touch</a>
-    <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch to light mode"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg></button>
+    <a class="lang-btn" id="langBtn" href="/fr/" hreflang="fr" lang="fr" aria-label="Version française">FR</a><button type="button" class="theme-btn" id="themeBtn" aria-label="Switch to light mode"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg></button>
     <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav"><svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="1" y1="2" x2="21" y2="2"/><line x1="1" y1="8" x2="21" y2="8"/><line x1="7" y1="14" x2="21" y2="14"/></svg></button>
   </header>
 </div>
@@ -2314,15 +2318,17 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
 (function(){
   var PAGES=Array.prototype.map.call(document.querySelectorAll('[data-page]'),function(el){return el.getAttribute('data-page');});
   var HOME_ANCHORS={process:'process',about:'about'};
+  var ALLP=PAGES;/*ALLP*/
   var nav=document.getElementById('mainNav'), menuBtn=document.getElementById('menuBtn');
   function setMenu(open){nav.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');document.body.style.overflow=open?'hidden':'';}
   menuBtn.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+  var FR=document.documentElement.lang==='fr';
   var metaDesc=document.querySelector('meta[name="description"]'),canon=document.querySelector('link[rel="canonical"]');
   function keyFromLocation(){
-    var p=location.pathname.replace(/^\/+|\/+$/g,'').replace(/\/index\.html$|^index\.html$/,'');
+    var p=location.pathname.replace(/^\/+|\/+$/g,'').replace(/\/?index\.html$/,'').replace(/^fr(\/|$)/,'');
     var h=(location.hash||'').slice(1);
     // old shared links like /#work/keepay or /#brief: move them to the real address
-    if(!p&&h&&PAGES.indexOf(h)>=0&&h!=='home'){history.replaceState(null,'','/'+h+'/');return h;}
+    if(!p&&h&&h!=='home'&&ALLP.indexOf(h)>=0){if(PAGES.indexOf(h)<0){location.replace('/'+h+'/');return 'home';}history.replaceState(null,'','/'+h+'/');return h;}
     if(!p&&HOME_ANCHORS[h])return h;
     return p||'home';
   }
@@ -2339,7 +2345,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     var pel=document.querySelector('[data-page="'+page+'"]');
     if(pel&&pel.dataset.title)document.title=pel.dataset.title;
     if(pel&&pel.dataset.desc&&metaDesc)metaDesc.setAttribute('content',pel.dataset.desc);
-    if(canon)canon.setAttribute('href','https://clovisnkwawir.com/'+(page==='home'?'':page+'/'));
+    if(canon)canon.setAttribute('href','https://clovisnkwawir.com/'+(FR?'fr/':'')+(page==='home'?'':page+'/'));
     setMenu(false);
     if(anchor){var t=document.getElementById(anchor);if(t)requestAnimationFrame(function(){t.scrollIntoView();});}
     else window.scrollTo(0,0);
@@ -2348,6 +2354,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
   document.addEventListener('click',function(e){
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     var a=e.target.closest&&e.target.closest('a[href]');if(!a||a.target||a.hasAttribute('download'))return;
+    if(FR)return;
     var u=new URL(a.getAttribute('href'),location.href);if(u.origin!==location.origin)return;
     var p=u.pathname.replace(/^\/+|\/+$/g,''),h=u.hash.slice(1);
     var ok=(p===''&&(!h||HOME_ANCHORS[h]))||PAGES.indexOf(p)>=0;if(!ok)return;
@@ -2468,8 +2475,8 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
   // intro video note
   var watch=document.getElementById('watchBtn');
   var vid=document.getElementById('vid'), vidFrame=document.getElementById('vidFrame'), vidClose=document.getElementById('vidClose');
-  function closeVid(){vid.hidden=true; vidFrame.src='about:blank'; document.body.style.overflow=''; watch.focus();}
-  watch.addEventListener('click',function(){vidFrame.src='https://www.youtube-nocookie.com/embed/U_rmyxgqIuw?autoplay=1&rel=0&modestbranding=1&playsinline=1'; vid.hidden=false; document.body.style.overflow='hidden'; vidClose.focus();});
+  function closeVid(){vid.hidden=true; vidFrame.src='about:blank'; document.body.style.overflow=''; if(watch)watch.focus();}
+  if(watch)watch.addEventListener('click',function(){vidFrame.src='https://www.youtube-nocookie.com/embed/U_rmyxgqIuw?autoplay=1&rel=0&modestbranding=1&playsinline=1'; vid.hidden=false; document.body.style.overflow='hidden'; vidClose.focus();});
   vidClose.addEventListener('click',closeVid);
   vid.addEventListener('click',function(e){if(e.target===vid)closeVid();});
   document.addEventListener('keydown',function(e){if(!vid.hidden&&e.key==='Escape')closeVid();});
@@ -2537,7 +2544,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
 
   // inquiry form -> Netlify Forms
   var form=document.getElementById('inquiry');
-  form.addEventListener('submit',function(e){
+  if(form)form.addEventListener('submit',function(e){
     e.preventDefault();
     var err=document.getElementById('formError');
     if(!form.checkValidity()){err.textContent='Please fill in the fields marked with *.';err.hidden=false;var bad=form.querySelector(':invalid');if(bad)bad.focus();return;}
