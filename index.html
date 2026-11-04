@@ -860,7 +860,6 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
       <p class="sub" style="margin-top:22px">I work with businesses preparing for growth, restructuring their brand presence, or improving their market positioning.</p>
       <div class="quote-grid" id="rvGrid" style="width:100%">
         <figure class="card quote" style="margin:0"><img src="icons/quote.svg" alt=""><p>Clovis demonstrated a deep understanding of our vision from the very beginning. His ability to translate our direction into a structured brand system made the entire process smooth, and the final outcome exceeded our expectations.</p><figcaption class="who"><b>CEO</b><span>WOW Packaging</span></figcaption></figure>
-        <figure class="card quote" style="margin:0"><img src="icons/quote.svg" alt=""><p>Our brand now reflects the professionalism of our operations. The structure and clarity brought to our identity has improved how we present ourselves to clients.</p><figcaption class="who"><b>CEO</b><span>Dexsy’s Hair Growth</span></figcaption></figure>
       </div>
       <div id="rvMore" class="rv-more" hidden><button type="button" class="btn-sm dark" id="rvMoreBtn">Show more reviews</button></div>
       <div class="rv-cta"><p class="sub">Worked with me? I’d love to hear how it went.</p><button type="button" class="btn-sm dark" id="rvOpen" aria-expanded="false" aria-controls="rvForm">Leave a review</button></div>
@@ -2349,7 +2348,7 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     var key=keyFromLocation();
     var page=key, anchor=null;
     if(HOME_ANCHORS[key]){page='home';anchor=HOME_ANCHORS[key];}
-    if(PAGES.indexOf(page)<0)page='home';
+    if(PAGES.indexOf(page)<0){if(ALLP.indexOf(page)>=0&&location.pathname!=='/'+page+'/'){location.reload();return;}page=PAGES.indexOf('home')>=0?'home':PAGES[0];}
     document.querySelectorAll('[data-page]').forEach(function(el){el.hidden=el.getAttribute('data-page')!==page;});
     document.querySelectorAll('[data-nav]').forEach(function(a){
       var k=a.getAttribute('data-nav');
@@ -2370,7 +2369,8 @@ img[data-zoom],.ia-item .frame{cursor:zoom-in}
     if(FR)return;
     var u=new URL(a.getAttribute('href'),location.href);if(u.origin!==location.origin)return;
     var p=u.pathname.replace(/^\/+|\/+$/g,''),h=u.hash.slice(1);
-    var ok=(p===''&&(!h||HOME_ANCHORS[h]))||PAGES.indexOf(p)>=0;if(!ok)return;
+    var target=p===''?'home':p;
+    var ok=PAGES.indexOf(target)>=0&&(p!==''||!h||HOME_ANCHORS[h]);if(!ok)return;
     e.preventDefault();
     if(u.pathname+u.hash!==location.pathname+location.hash)history.pushState(null,'',u.pathname+u.hash);
     route();
