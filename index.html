@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jerry at 50 · Commemorative Magazine</title>
+<meta name="description" content="Jerry Pani: 50th Birthday Celebration & 20th Wedding Anniversary. Cape Town, November 2026.">
+<meta property="og:title" content="Jerry at 50 · Commemorative Magazine">
+<meta property="og:description" content="50th Birthday Celebration & 20th Wedding Anniversary. Cape Town, November 2026.">
+<meta property="og:image" content="pages/p00.jpg">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+<style>
+:root{--bg:#0a0a0a;--gold:#d9b65e;--cream:#efe6d4;--muted:#9b917f;--bar:56px}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif}
+header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;background:linear-gradient(180deg,rgba(10,10,10,.96),rgba(10,10,10,.8));z-index:5}
+.brand{font-weight:600;font-size:20px;color:var(--gold);white-space:nowrap}
+.brand span{color:var(--cream);font-style:italic;font-weight:500;margin-left:6px}
+.right{display:flex;align-items:center;gap:14px}
+.count{font-size:17px;color:var(--muted);font-variant-numeric:lining-nums tabular-nums}
+.dl{display:inline-flex;align-items:center;gap:6px;color:var(--bg);background:var(--gold);text-decoration:none;font-weight:600;font-size:16px;padding:8px 14px;border-radius:999px;min-height:40px}
+.dl:hover{background:#e7c97a}
+.dl svg{width:16px;height:16px}
+
+/* desktop spread viewer */
+#book{position:fixed;inset:var(--bar) 0 0 0;display:none;align-items:center;justify-content:center;padding:18px 72px 26px}
+#spread{position:relative;display:flex;height:100%;max-width:100%;aspect-ratio:1588/1123;transition:opacity .28s ease}
+#spread.single{aspect-ratio:794/1123}
+#spread img{height:100%;width:auto;max-width:50%;object-fit:contain;display:block;box-shadow:0 18px 50px rgba(0,0,0,.6);background:#1a1712;user-select:none;-webkit-user-drag:none}
+#spread.single img{max-width:100%}
+#spread .gutter{position:absolute;top:0;bottom:0;left:50%;width:36px;margin-left:-18px;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.28) 45%,rgba(0,0,0,.28) 55%,rgba(0,0,0,0))}
+#spread.single .gutter{display:none}
+#spread.fade{opacity:0}
+.nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(217,182,94,.5);background:rgba(10,10,10,.6);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:4}
+.nav:hover{background:rgba(217,182,94,.15)}
+.nav:disabled{opacity:.25;cursor:default}
+.nav svg{width:22px;height:22px}
+#prev{left:14px}#next{right:14px}
+.hint{position:fixed;bottom:6px;left:0;right:0;text-align:center;font-size:14px;color:var(--muted);font-style:italic}
+
+/* mobile single-page reader */
+#reel{display:none;position:fixed;inset:var(--bar) 0 0 0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#reel::-webkit-scrollbar{display:none}
+#reel .pg{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:10px}
+#reel img{max-width:100%;max-height:100%;width:auto;height:auto;box-shadow:0 10px 30px rgba(0,0,0,.6);background:#1a1712}
+.mobile #reel{display:flex}
+.desktop #book{display:flex}
+.mobile .nav,.mobile .hint{display:none}
+@media (max-width:520px){.brand span{display:none}.dl .t{display:none}.dl{padding:8px 11px}header{padding:0 12px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Jerry at 50<span>· 50 years of life, 20 years of love</span></div>
+  <div class="right">
+    <div class="count" id="count" aria-live="polite"></div>
+    <a class="dl" href="Jerry_at_50_Magazine.pdf" download aria-label="Download the magazine as a PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span class="t">Download PDF</span></a>
+  </div>
+</header>
+
+<main id="book" aria-label="Magazine, two-page view">
+  <div id="spread"></div>
+</main>
+<button class="nav" id="prev" aria-label="Previous pages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+<button class="nav" id="next" aria-label="Next pages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+<div class="hint">Use the arrows, your keyboard or click a page to turn</div>
+
+<main id="reel" aria-label="Magazine, one page at a time"></main>
+
+<script>
+(function(){
+  var N = 52;
+  var src = function(i){ return 'pages/p' + (i < 10 ? '0' : '') + i + '.jpg'; };
+  var label = function(i){
+    if (i === 0) return 'Front cover';
+    if (i === 1) return 'Inside front cover';
+    if (i === N - 2) return 'Inside back cover';
+    if (i === N - 1) return 'Back cover';
+    return 'Page ' + (i - 1);
+  };
+  // spreads: cover alone, then pairs, back cover alone
+  var spreads = [[0]];
+  for (var i = 1; i < N - 1; i += 2) spreads.push([i, i + 1]);
+  spreads.push([N - 1]);
+
+  var count = document.getElementById('count');
+  var spreadEl = document.getElementById('spread');
+  var prev = document.getElementById('prev'), next = document.getElementById('next');
+  var reel = document.getElementById('reel');
+  var s = 0, mode = null, cache = {};
+
+  function preload(i){ if (i < 0 || i >= N || cache[i]) return; var im = new Image(); im.src = src(i); cache[i] = im; }
+
+  function showSpread(k, animate){
+    s = Math.max(0, Math.min(spreads.length - 1, k));
+    var pages = spreads[s];
+    var draw = function(){
+      spreadEl.innerHTML = '';
+      spreadEl.className = pages.length === 1 ? 'single' : '';
+      pages.forEach(function(p){
+        var im = document.createElement('img');
+        im.src = src(p); im.alt = label(p); im.dataset.p = p;
+        spreadEl.appendChild(im);
+      });
+      var g = document.createElement('div'); g.className = 'gutter'; spreadEl.appendChild(g);
+      spreadEl.classList.remove('fade');
+    };
+    if (animate) { spreadEl.classList.add('fade'); setTimeout(draw, 160); } else draw();
+    prev.disabled = s === 0; next.disabled = s === spreads.length - 1;
+    count.textContent = pages.map(label).join(' · ');
+    [-1, 1, 2].forEach(function(d){ var sp = spreads[s + d]; if (sp) sp.forEach(preload); });
+    try { history.replaceState(null, '', '#p' + pages[0]); } catch (e) {}
+  }
+  function spreadOf(p){ for (var k = 0; k < spreads.length; k++) if (spreads[k].indexOf(p) >= 0) return k; return 0; }
+
+  prev.onclick = function(){ showSpread(s - 1, true); };
+  next.onclick = function(){ showSpread(s + 1, true); };
+  spreadEl.addEventListener('click', function(e){
+    var r = spreadEl.getBoundingClientRect();
+    showSpread(s + (e.clientX - r.left > r.width / 2 ? 1 : -1), true);
+  });
+  document.addEventListener('keydown', function(e){
+    if (mode !== 'desktop') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); showSpread(s + 1, true); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); showSpread(s - 1, true); }
+    if (e.key === 'Home') showSpread(0, true);
+    if (e.key === 'End') showSpread(spreads.length - 1, true);
+  });
+
+  // mobile reel
+  var built = false, io;
+  function buildReel(){
+    if (built) return; built = true;
+    for (var i = 0; i < N; i++) {
+      var d = document.createElement('div'); d.className = 'pg'; d.dataset.p = i;
+      var im = document.createElement('img'); im.alt = label(i);
+      im.loading = i < 3 ? 'eager' : 'lazy'; im.src = src(i);
+      d.appendChild(im); reel.appendChild(d);
+    }
+    io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if (en.isIntersecting && en.intersectionRatio > .6) {
+        var p = +en.target.dataset.p; count.textContent = (p + 1) + ' / ' + N;
+        try { history.replaceState(null, '', '#p' + p); } catch (e) {}
+      }});
+    }, { root: reel, threshold: [.6] });
+    reel.querySelectorAll('.pg').forEach(function(el){ io.observe(el); });
+  }
+
+  function currentPage(){
+    if (mode === 'mobile') { return Math.round(reel.scrollLeft / reel.clientWidth); }
+    if (mode === 'desktop') return spreads[s][0];
+    var m = /#p(\d+)/.exec(location.hash); return m ? Math.min(N - 1, +m[1]) : 0;
+  }
+  var mq = window.matchMedia('(min-width: 900px) and (min-aspect-ratio: 5/4)');
+  function apply(){
+    var p = currentPage();
+    mode = mq.matches ? 'desktop' : 'mobile';
+    document.body.className = mode;
+    if (mode === 'desktop') showSpread(spreadOf(p), false);
+    else { buildReel(); requestAnimationFrame(function(){ reel.scrollLeft = p * reel.clientWidth; count.textContent = (p + 1) + ' / ' + N; }); }
+  }
+  (mq.addEventListener ? mq.addEventListener('change', apply) : mq.addListener(apply));
+  window.addEventListener('resize', function(){ if (mode === 'mobile') { var p = Math.round(reel.scrollLeft / reel.clientWidth); reel.scrollLeft = p * reel.clientWidth; } });
+  apply();
+})();
+</script>
+</body>
+</html>
