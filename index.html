@@ -66,6 +66,18 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 .grid button.cur img{border-color:var(--gold)}
 .grid button.cur{color:var(--ink);font-weight:600}
 @media (max-width:560px){.chap{grid-template-columns:1fr}.pick .t{display:none}.pick{padding:8px 11px}.grid{grid-template-columns:repeat(3,1fr)}}
+
+#log{position:fixed;inset:0;z-index:20;background:rgba(20,16,10,.45);display:none;align-items:stretch;justify-content:flex-end}
+#log.open{display:flex}
+.logday{margin:0 0 20px}
+.logday h3{margin:0 0 8px;font-size:20px;font-weight:600;color:var(--gold)}
+.logday ul{margin:0;padding:0 0 0 18px;font-size:18px;line-height:1.35}
+.logday li{margin:0 0 6px}
+.logday button{all:unset;cursor:pointer;color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+.lognote{font-size:16px;color:var(--muted);font-style:italic;margin:0 0 18px}
+.pick{position:relative}
+.dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:#c0392b;display:none}
+.dot.on{display:block}
 </style>
 </head>
 <body>
@@ -73,6 +85,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   <div class="brand">Jerry at 50<span>· 50 years of life, 20 years of love</span></div>
   <div class="right">
     <div class="count" id="count" aria-live="polite"></div>
+    <button class="pick" id="openLog" aria-label="See recent updates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="t">Updates</span><span class="dot" id="logDot"></span></button>
     <button class="pick" id="openPicker" aria-label="Choose a page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="t">Pages</span></button>
     <a class="dl" href="Jerry_at_50_Magazine.pdf" download aria-label="Download the magazine as a PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span class="t">Download PDF</span></a>
   </div>
@@ -84,6 +97,13 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 <button class="nav" id="next" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 <div class="hint" id="hint"></div>
 
+<div id="log" role="dialog" aria-modal="true" aria-label="Recent updates">
+  <div class="panel">
+    <div class="ph"><h2>Recent updates</h2><button class="close" id="closeLog" aria-label="Close">&times;</button></div>
+    <p class="lognote">This magazine is still being refined. Here is what has changed recently.</p>
+    <div id="logList"></div>
+  </div>
+</div>
 <div id="picker" role="dialog" aria-modal="true" aria-label="Choose a page">
   <div class="panel">
     <div class="ph"><h2>Go to a page</h2><button class="close" id="closePicker" aria-label="Close">&times;</button></div>
@@ -176,10 +196,35 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   document.getElementById('jumpForm').onsubmit=function(e){ e.preventDefault(); var v=parseInt(document.getElementById('jumpIn').value,10); if(!isNaN(v)) goTo(v+1); };
   count.style.cursor='pointer'; count.title='Choose a page'; count.onclick=openP;
 
+  // modifications log: [date, [[text, pageIndexOrNull], ...]]
+  var LOG=[
+    ['13 November 2026',[
+      ['The Pani family page now features the Christmas family portrait',30],
+      ['Page 48 has a new background, and the page number was removed',49],
+      ['Back cover refined',51],
+      ['Front cover refreshed with the final artwork',0],
+      ['New Pages button to jump to any page or chapter',null]
+    ]],
+    ['12 November 2026',[
+      ['Metallic gold finish on the cover titles',0],
+      ['Updates to the Limen family, Thank You and closing pages',36],
+      ['Light background and page-turn effect for easier reading',null],
+      ['First full draft shared',null]
+    ]]
+  ];
+  var LOGV=LOG[0][0];
+  var logEl=document.getElementById('log');
+  (function(){ var L=document.getElementById('logList'); LOG.forEach(function(d){ var w=document.createElement('div'); w.className='logday'; var h=document.createElement('h3'); h.textContent=d[0]; w.appendChild(h); var ul=document.createElement('ul'); d[1].forEach(function(it){ var li=document.createElement('li'); li.appendChild(document.createTextNode(it[0])); if(it[1]!==null){ li.appendChild(document.createTextNode(' ')); var b=document.createElement('button'); b.textContent='View'; b.onclick=function(){ logEl.classList.remove('open'); goTo(it[1]); }; li.appendChild(b);} ul.appendChild(li); }); w.appendChild(ul); L.appendChild(w); }); })();
+  try{ if(localStorage.getItem('jerry50log')!==LOGV) document.getElementById('logDot').classList.add('on'); }catch(e){}
+  document.getElementById('openLog').onclick=function(){ logEl.classList.add('open'); logEl.querySelector('.panel').scrollTop=0; document.getElementById('logDot').classList.remove('on'); try{localStorage.setItem('jerry50log',LOGV);}catch(e){} };
+  document.getElementById('closeLog').onclick=function(){ logEl.classList.remove('open'); };
+  logEl.addEventListener('click',function(e){ if(e.target===logEl) logEl.classList.remove('open'); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') logEl.classList.remove('open'); });
+
   prev.onclick = function(){ book && book.flipPrev(); };
   next.onclick = function(){ book && book.flipNext(); };
   document.addEventListener('keydown', function(e){
-    if (!book || picker.classList.contains('open')) return;
+    if (!book || picker.classList.contains('open') || document.getElementById('log').classList.contains('open')) return;
     if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); book.flipNext(); }
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); book.flipPrev(); }
   });
