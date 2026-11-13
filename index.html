@@ -42,6 +42,30 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 .portrait .nav{width:40px;height:40px;top:auto;bottom:14px;transform:none;opacity:.92}
 .portrait #prev{left:14px}.portrait #next{right:14px}
 @media (max-width:560px){.brand span{display:none}.dl .t{display:none}.dl{padding:8px 11px}header{padding:0 12px}}
+
+.pick{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,.14);color:var(--ink);font:600 16px 'Cormorant Garamond',Georgia,serif;padding:7px 13px;border-radius:999px;min-height:40px;cursor:pointer}
+.pick:hover{border-color:var(--gold);color:var(--gold)}
+.pick svg{width:16px;height:16px}
+#picker{position:fixed;inset:0;z-index:20;background:rgba(20,16,10,.45);display:none;align-items:stretch;justify-content:flex-end}
+#picker.open{display:flex}
+.panel{background:#faf8f4;width:min(560px,100%);height:100%;overflow-y:auto;padding:22px 22px 40px;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ph h2{margin:0;font-size:30px;font-weight:600}
+.close{border:none;background:none;font-size:30px;line-height:1;cursor:pointer;color:var(--ink);padding:4px 8px}
+.jump{display:flex;gap:8px;align-items:center;margin:0 0 18px;font-size:18px}
+.jump input{width:80px;font:inherit;padding:6px 10px;border:1px solid rgba(0,0,0,.2);border-radius:8px;background:#fff}
+.jump button{font:600 16px 'Cormorant Garamond',serif;background:var(--gold-btn);border:none;border-radius:999px;padding:7px 16px;cursor:pointer}
+.chap{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin:0 0 22px;padding:0;list-style:none}
+.chap button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:5px 0;font-size:18px;line-height:1.2}
+.chap button:hover{color:var(--gold)}
+.chap b{color:var(--gold);font-weight:600;min-width:24px;font-variant-numeric:lining-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:14px}
+.grid button{all:unset;cursor:pointer;text-align:center;font-size:14px;color:var(--muted)}
+.grid img{width:100%;aspect-ratio:794/1123;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,.18);margin-bottom:5px;border:2px solid transparent;box-sizing:border-box}
+.grid button:hover img{border-color:var(--gold)}
+.grid button.cur img{border-color:var(--gold)}
+.grid button.cur{color:var(--ink);font-weight:600}
+@media (max-width:560px){.chap{grid-template-columns:1fr}.pick .t{display:none}.pick{padding:8px 11px}.grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -49,6 +73,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   <div class="brand">Jerry at 50<span>· 50 years of life, 20 years of love</span></div>
   <div class="right">
     <div class="count" id="count" aria-live="polite"></div>
+    <button class="pick" id="openPicker" aria-label="Choose a page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="t">Pages</span></button>
     <a class="dl" href="Jerry_at_50_Magazine.pdf" download aria-label="Download the magazine as a PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span class="t">Download PDF</span></a>
   </div>
 </header>
@@ -59,6 +84,14 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 <button class="nav" id="next" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 <div class="hint" id="hint"></div>
 
+<div id="picker" role="dialog" aria-modal="true" aria-label="Choose a page">
+  <div class="panel">
+    <div class="ph"><h2>Go to a page</h2><button class="close" id="closePicker" aria-label="Close">&times;</button></div>
+    <form class="jump" id="jumpForm"><label for="jumpIn">Page</label><input id="jumpIn" type="number" min="1" max="48" inputmode="numeric" placeholder="1 to 48"><button type="submit">Go</button></form>
+    <ul class="chap" id="chap"></ul>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
 <script src="page-flip.js"></script>
 <script>
 (function(){
@@ -125,10 +158,28 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
     updateUI(book.getCurrentPageIndex());
   }
 
+  // page picker
+  var chapters=[[0,'Front cover'],[2,'Contents'],[3,'A Heartfelt Welcome'],[5,'The Making of a Man'],[7,'Where It All Began'],[11,'Honoured'],[15,'The Man. The Vision. The Legacy.'],[21,'Where Our Forever Began'],[25,'To My Loving Husband'],[27,'Our Family'],[31,'Adventures Together'],[33,'Surrounded by Love'],[35,'A Bond We Treasure'],[37,'Words of Love'],[44,'The Best Is Yet to Come'],[48,'Six Days of Celebration'],[51,'Back cover']];
+  var picker=document.getElementById('picker'), grid=document.getElementById('grid'), chap=document.getElementById('chap'), built2=false;
+  function goTo(i){ closeP(); if(!book) return; i=Math.max(0,Math.min(N-1,i)); book.turnToPage(i); updateUI(book.getCurrentPageIndex()); }
+  function buildPicker(){
+    if(built2) return; built2=true;
+    chapters.forEach(function(c){ var li=document.createElement('li'), b=document.createElement('button'); var n=c[0]>1&&c[0]<N-2?String(c[0]-1).padStart(2,'0'):''; b.innerHTML='<b>'+n+'</b><span>'+c[1]+'</span>'; b.onclick=function(){goTo(c[0]);}; li.appendChild(b); chap.appendChild(li); });
+    for(var i=0;i<N;i++){ (function(i){ var b=document.createElement('button'); b.dataset.i=i; var im=document.createElement('img'); im.loading='lazy'; im.alt=''; im.src='thumbs/t'+(i<10?'0':'')+i+'.jpg'; b.appendChild(im); b.appendChild(document.createTextNode(label(i).replace('Page ','').replace('Inside front cover','Inside front').replace('Inside back cover','Inside back'))); b.setAttribute('aria-label','Go to '+label(i)); b.onclick=function(){goTo(i);}; grid.appendChild(b); })(i); }
+  }
+  function openP(){ buildPicker(); grid.querySelectorAll('button').forEach(function(b){ b.classList.toggle('cur', +b.dataset.i===current); }); picker.classList.add('open'); var c=grid.querySelector('.cur'); var pn=picker.querySelector('.panel'); pn.scrollTop=0; if(c && current>8) c.scrollIntoView({block:'center'}); }
+  function closeP(){ picker.classList.remove('open'); }
+  document.getElementById('openPicker').onclick=openP;
+  document.getElementById('closePicker').onclick=closeP;
+  picker.addEventListener('click',function(e){ if(e.target===picker) closeP(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeP(); });
+  document.getElementById('jumpForm').onsubmit=function(e){ e.preventDefault(); var v=parseInt(document.getElementById('jumpIn').value,10); if(!isNaN(v)) goTo(v+1); };
+  count.style.cursor='pointer'; count.title='Choose a page'; count.onclick=openP;
+
   prev.onclick = function(){ book && book.flipPrev(); };
   next.onclick = function(){ book && book.flipNext(); };
   document.addEventListener('keydown', function(e){
-    if (!book) return;
+    if (!book || picker.classList.contains('open')) return;
     if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); book.flipNext(); }
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); book.flipPrev(); }
   });
