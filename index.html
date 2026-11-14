@@ -24,7 +24,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 .dl:hover{background:#e7c97a}
 .dl svg{width:16px;height:16px}
 
-#stage{position:fixed;inset:var(--bar) 0 0 0;display:flex;align-items:center;justify-content:center}
+#stage{position:fixed;inset:var(--bar) 0 66px 0;display:flex;align-items:center;justify-content:center}
 #holder{position:relative}
 .page{background:#fff}
 .page img{width:100%;height:100%;display:block;object-fit:cover;user-select:none;-webkit-user-drag:none}
@@ -37,7 +37,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 .nav:disabled{opacity:.35;cursor:default}
 .nav svg{width:22px;height:22px}
 #prev{left:16px}#next{right:16px}
-.hint{position:fixed;bottom:8px;left:0;right:0;text-align:center;font-size:15px;color:var(--muted);font-style:italic;pointer-events:none}
+.hint{display:none;position:fixed;bottom:8px;left:0;right:0;text-align:center;font-size:15px;color:var(--muted);font-style:italic;pointer-events:none}
 .loading{position:fixed;inset:var(--bar) 0 0 0;display:flex;align-items:center;justify-content:center;font-size:20px;font-style:italic;color:var(--muted)}
 .portrait .nav{width:40px;height:40px;top:auto;bottom:14px;transform:none;opacity:.92}
 .portrait #prev{left:14px}.portrait #next{right:14px}
@@ -78,6 +78,38 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 .pick{position:relative}
 .dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:#c0392b;display:none}
 .dot.on{display:block}
+
+.noteBtn{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:6;display:inline-flex;align-items:center;gap:8px;background:#1d1a16;color:#f3ead8;border:none;border-radius:999px;padding:10px 20px;min-height:44px;font:600 17px 'Cormorant Garamond',Georgia,serif;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2);white-space:nowrap}
+.noteBtn:hover{background:#000}
+.noteBtn svg{width:18px;height:18px;color:var(--gold-btn)}
+#note{position:fixed;inset:0;z-index:25;background:rgba(20,16,10,.5);display:none;align-items:flex-end;justify-content:center}
+#note.open{display:flex}
+.sheet{background:#faf8f4;width:min(560px,100%);max-height:92vh;overflow-y:auto;border-radius:18px 18px 0 0;padding:20px 20px 28px;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+@media (min-width:700px){#note{align-items:center}.sheet{border-radius:18px}}
+.sheet h2{margin:0;font-size:28px;font-weight:600}
+.sub{margin:4px 0 16px;color:var(--muted);font-size:17px;font-style:italic}
+.which{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+.which button{font:600 16px 'Cormorant Garamond',serif;border:1px solid rgba(0,0,0,.18);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;color:var(--ink)}
+.which button.sel{background:#1d1a16;color:#f3ead8;border-color:#1d1a16}
+.field{display:block;margin:0 0 14px}
+.field span{display:block;font-size:17px;margin:0 0 6px}
+.field input,.field textarea{width:100%;box-sizing:border-box;font:17px 'Century Gothic','Montserrat',system-ui,sans-serif;padding:10px 12px;border:1px solid rgba(0,0,0,.2);border-radius:10px;background:#fff;color:var(--ink)}
+.field textarea{min-height:96px;resize:vertical}
+.rec{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;padding:12px;border:1px solid rgba(0,0,0,.12);border-radius:12px;background:#fff}
+.recBtn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:999px;padding:10px 16px;min-height:44px;font:600 17px 'Cormorant Garamond',serif;cursor:pointer;background:#b8352b;color:#fff}
+.recBtn.stop{background:#1d1a16}
+.recBtn .rd{width:12px;height:12px;border-radius:50%;background:#fff}
+.recBtn.stop .rd{border-radius:2px}
+.recBtn.live .rd{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.rec audio{height:40px;max-width:100%}
+.timer{font-variant-numeric:tabular-nums;font-size:18px;color:var(--muted)}
+[hidden]{display:none!important}
+.linkBtn{all:unset;cursor:pointer;color:#8a6a22;text-decoration:underline;font-size:16px}
+.send{width:100%;border:none;border-radius:999px;padding:12px;min-height:48px;font:600 19px 'Cormorant Garamond',serif;background:var(--gold-btn);color:#1d1a16;cursor:pointer}
+.send:disabled{opacity:.5;cursor:default}
+.msg{margin:12px 0 0;font-size:17px;min-height:1em}
+.msg.err{color:#a3271d}.msg.ok{color:#2f6b2f}
 </style>
 </head>
 <body>
@@ -97,6 +129,24 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 <button class="nav" id="next" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 <div class="hint" id="hint"></div>
 
+<button class="noteBtn" id="openNote" aria-label="Leave a note about this page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Leave a note on this page</button>
+<div id="note" role="dialog" aria-modal="true" aria-label="Leave a note">
+  <div class="sheet">
+    <div class="ph" style="margin:0"><h2>Leave a note</h2><button class="close" id="closeNote" aria-label="Close">&times;</button></div>
+    <p class="sub">Tell us how you would like this page changed. Record a voice note, type a message, or both.</p>
+    <div class="which" id="which"></div>
+    <div class="rec">
+      <button type="button" class="recBtn" id="recBtn"><span class="rd"></span><span id="recTxt">Record voice note</span></button>
+      <span class="timer" id="timer"></span>
+      <audio id="playback" controls hidden></audio>
+      <button type="button" class="linkBtn" id="discard" hidden>Delete recording</button>
+    </div>
+    <label class="field"><span>Message (optional)</span><textarea id="noteText" maxlength="4000" placeholder="For example: please use a different photo here"></textarea></label>
+    <label class="field"><span>Your name (optional)</span><input id="noteName" maxlength="120" autocomplete="name"></label>
+    <button type="button" class="send" id="sendNote">Send note</button>
+    <p class="msg" id="noteMsg" aria-live="polite"></p>
+  </div>
+</div>
 <div id="log" role="dialog" aria-modal="true" aria-label="Recent updates">
   <div class="panel">
     <div class="ph"><h2>Recent updates</h2><button class="close" id="closeLog" aria-label="Close">&times;</button></div>
@@ -141,10 +191,10 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   }
 
   function build(){
-    var W = window.innerWidth, H = window.innerHeight - 56;
+    var W = window.innerWidth, H = window.innerHeight - 56 - 66;
     portrait = !(W >= 900 && W / H >= 1.25);
     document.body.classList.toggle('portrait', portrait);
-    var padX = portrait ? 16 : 150, padY = portrait ? 74 : 56;
+    var padX = portrait ? 16 : 150, padY = portrait ? 20 : 30;
     var ph = H - padY, pw = ph / RATIO;
     var maxW = portrait ? (W - padX) : (W - padX) / 2;
     if (pw > maxW) { pw = maxW; ph = pw * RATIO; }
@@ -198,6 +248,9 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 
   // modifications log: [date, [[text, pageIndexOrNull], ...]]
   var LOG=[
+    ['14 November 2026',[
+      ['New: leave a voice note or a message on any page',null]
+    ]],
     ['13 November 2026',[
       ['The Pani family page redesigned around the Christmas family portrait, shown in full',30],
       ['Page 48 has a new background, and the page number was removed',49],
@@ -221,10 +274,57 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   logEl.addEventListener('click',function(e){ if(e.target===logEl) logEl.classList.remove('open'); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') logEl.classList.remove('open'); });
 
+  // ---- page notes (Supabase) ----
+  var SB='https://gxiyluzvxzyglocbgssm.supabase.co', KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd4aXlsdXp2eHp5Z2xvY2Jnc3NtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1MjQwMjAsImV4cCI6MjEwOTEwMDAyMH0.hIEYeXHmTZWrhg1mzSUxqaDOy3i_dEGXI3tFmffOqJc';
+  var noteEl=document.getElementById('note'), which=document.getElementById('which'), recBtn=document.getElementById('recBtn'), recTxt=document.getElementById('recTxt'), timerEl=document.getElementById('timer'), pb=document.getElementById('playback'), discard=document.getElementById('discard'), noteText=document.getElementById('noteText'), noteName=document.getElementById('noteName'), sendBtn=document.getElementById('sendNote'), noteMsg=document.getElementById('noteMsg');
+  var notePage=0, rec=null, chunks=[], blob=null, blobType='', secs=0, tick=null, stream=null;
+  try{ noteName.value=localStorage.getItem('jerry50name')||''; }catch(e){}
+  function visiblePages(){ var i=current; if(portrait||i===0||i===N-1) return [i]; var a=i%2?i:i-1; return [a,a+1]; }
+  function setMsg(t,c){ noteMsg.textContent=t; noteMsg.className='msg'+(c?' '+c:''); }
+  function fmt(t){ return Math.floor(t/60)+':'+String(t%60).padStart(2,'0'); }
+  function resetRec(){ if(rec&&rec.state!=='inactive'){ try{rec.onstop=null;rec.stop();}catch(e){} } if(stream){stream.getTracks().forEach(function(t){t.stop();});stream=null;} clearInterval(tick); rec=null; chunks=[]; blob=null; secs=0; timerEl.textContent=''; pb.hidden=true; pb.removeAttribute('src'); discard.hidden=true; recBtn.className='recBtn'; recTxt.textContent='Record voice note'; }
+  function openNote(){ var v=visiblePages(); notePage=v.length===2?v[0]:v[0]; which.innerHTML=''; if(v.length===2){ v.forEach(function(p){ var b=document.createElement('button'); b.type='button'; b.textContent=label(p)+(p===v[0]?' (left)':' (right)'); b.onclick=function(){ notePage=p; which.querySelectorAll('button').forEach(function(x){x.classList.toggle('sel',x===b);}); }; if(p===notePage) b.classList.add('sel'); which.appendChild(b); }); which.hidden=false; } else { which.innerHTML='<button type="button" class="sel">'+label(v[0])+'</button>'; } setMsg(''); sendBtn.disabled=false; noteEl.classList.add('open'); }
+  function closeNote(){ noteEl.classList.remove('open'); resetRec(); }
+  document.getElementById('openNote').onclick=openNote;
+  document.getElementById('closeNote').onclick=closeNote;
+  noteEl.addEventListener('click',function(e){ if(e.target===noteEl) closeNote(); });
+  discard.onclick=function(){ resetRec(); };
+  recBtn.onclick=function(){
+    if(rec&&rec.state==='recording'){ rec.stop(); return; }
+    if(!navigator.mediaDevices||!window.MediaRecorder){ setMsg('Voice recording is not supported in this browser. Please type your message instead.','err'); return; }
+    resetRec(); setMsg('');
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){
+      stream=st; var types=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus','audio/aac'], t='';
+      for(var i=0;i<types.length;i++){ if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(types[i])){t=types[i];break;} }
+      rec=t?new MediaRecorder(st,{mimeType:t}):new MediaRecorder(st);
+      rec.ondataavailable=function(e){ if(e.data&&e.data.size) chunks.push(e.data); };
+      rec.onstop=function(){ clearInterval(tick); stream.getTracks().forEach(function(x){x.stop();}); stream=null; blobType=(rec.mimeType||t||'audio/webm').split(';')[0]; blob=new Blob(chunks,{type:blobType}); pb.src=URL.createObjectURL(blob); pb.hidden=false; discard.hidden=false; recBtn.className='recBtn'; recTxt.textContent='Record again'; timerEl.textContent=fmt(secs); };
+      rec.start(); secs=0; timerEl.textContent='0:00'; recBtn.className='recBtn stop live'; recTxt.textContent='Stop recording';
+      tick=setInterval(function(){ secs++; timerEl.textContent=fmt(secs); if(secs>=300) rec.stop(); },1000);
+    }).catch(function(){ setMsg('We could not use your microphone. Please allow microphone access, or type your message instead.','err'); });
+  };
+  function extFor(t){ return t.indexOf('mp4')>=0?'m4a':t.indexOf('ogg')>=0?'ogg':t.indexOf('aac')>=0?'aac':t.indexOf('mpeg')>=0?'mp3':'webm'; }
+  sendBtn.onclick=function(){
+    if(rec&&rec.state==='recording'){ setMsg('Please stop the recording first.','err'); return; }
+    var text=noteText.value.trim(), name=noteName.value.trim();
+    if(!blob&&!text){ setMsg('Please record a voice note or type a message.','err'); return; }
+    try{ localStorage.setItem('jerry50name',name); }catch(e){}
+    sendBtn.disabled=true; setMsg('Sending…');
+    var up=Promise.resolve(null);
+    if(blob){
+      var path='p'+String(notePage).padStart(2,'0')+'/'+new Date().toISOString().replace(/[:.]/g,'-')+'-'+Math.random().toString(36).slice(2,8)+'.'+extFor(blobType);
+      up=fetch(SB+'/storage/v1/object/magazine-voice-notes/'+path,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':blobType,'x-upsert':'false'},body:blob}).then(function(r){ if(!r.ok) return r.text().then(function(t){throw new Error('upload '+r.status+' '+t);}); return path; });
+    }
+    up.then(function(path){
+      return fetch(SB+'/rest/v1/magazine_feedback',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({page_index:notePage,page_label:label(notePage),message:text||null,audio_path:path,audio_seconds:path?secs:null,author:name||null})}).then(function(r){ if(!r.ok) return r.text().then(function(t){throw new Error('save '+r.status+' '+t);}); });
+    }).then(function(){ noteText.value=''; resetRec(); setMsg('Thank you, your note for '+label(notePage)+' has been sent.','ok'); sendBtn.disabled=false; }).catch(function(e){ console.log(e); setMsg('Sorry, the note could not be sent. Please check your connection and try again.','err'); sendBtn.disabled=false; });
+  };
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&noteEl.classList.contains('open')) closeNote(); });
+
   prev.onclick = function(){ book && book.flipPrev(); };
   next.onclick = function(){ book && book.flipNext(); };
   document.addEventListener('keydown', function(e){
-    if (!book || picker.classList.contains('open') || document.getElementById('log').classList.contains('open')) return;
+    if (!book || picker.classList.contains('open') || document.getElementById('log').classList.contains('open') || document.getElementById('note').classList.contains('open')) return;
     if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); book.flipNext(); }
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); book.flipPrev(); }
   });
