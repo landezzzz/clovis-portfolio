@@ -165,7 +165,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 <script src="page-flip.js"></script>
 <script>
 (function(){
-  var N = 52, RATIO = 1123 / 794;
+  var N = 54, RATIO = 1123 / 794;
   var src = function(i){ return 'pages/p' + (i < 10 ? '0' : '') + i + '.jpg'; };
   var label = function(i){
     if (i === 0) return 'Front cover';
@@ -229,7 +229,7 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
   }
 
   // page picker
-  var chapters=[[0,'Front cover'],[2,'Contents'],[3,'A Heartfelt Welcome'],[5,'The Making of a Man'],[7,'Where It All Began'],[11,'Honoured'],[15,'The Man. The Vision. The Legacy.'],[21,'Where Our Forever Began'],[25,'To My Loving Husband'],[27,'Our Family'],[31,'Adventures Together'],[33,'Surrounded by Love'],[35,'A Bond We Treasure'],[37,'Words of Love'],[44,'The Best Is Yet to Come'],[48,'Six Days of Celebration'],[50,'The Evening Programme'],[51,'Back cover']];
+  var chapters=[[0,'Front cover'],[2,'Contents'],[3,'A Heartfelt Welcome'],[5,'The Making of a Man'],[7,'Where It All Began'],[11,'Honoured'],[15,'The Man. The Vision. The Legacy.'],[21,'Where Our Forever Began'],[25,'To My Loving Husband'],[27,'Our Family'],[31,'Adventures Together'],[33,'Surrounded by Love'],[35,'A Bond We Treasure'],[37,'Words of Love'],[44,'The Best Is Yet to Come'],[48,'Six Days of Celebration'],[50,'Getting Around: coaches and dress codes'],[52,'The Evening Programme'],[53,'Back cover']];
   var picker=document.getElementById('picker'), grid=document.getElementById('grid'), chap=document.getElementById('chap'), built2=false;
   function goTo(i){ closeP(); if(!book) return; i=Math.max(0,Math.min(N-1,i)); book.turnToPage(i); updateUI(book.getCurrentPageIndex()); }
   function buildPicker(){
@@ -248,10 +248,16 @@ header{position:fixed;inset:0 0 auto 0;height:var(--bar);display:flex;align-item
 
   // modifications log: [date, [[text, pageIndexOrNull], ...]]
   var LOG=[
+    ['17 November 2026',[
+      ['The full itinerary is now in the magazine: Tuesday to Thursday on page 47',48],
+      ['Friday to Sunday on page 48, with framed photos and date badges for each day',49],
+      ['New page 49, Getting Around: coach pick-up times, boarding times and dress codes',50],
+      ['The magazine now has 50 inside pages; the closing page "Thus Far the LORD Has Helped Us" is now page 50',51]
+    ]],
     ['16 November 2026',[
       ['Page 31: the dolphin swim photo now takes the place of the boat kiss photo',32],
       ['Page 45: photo removed, the page is now text only',46],
-      ['The evening programme for Saturday 28 November added on the inside back cover',50]
+      ['The evening programme for Saturday 28 November added on the inside back cover',52]
     ]],
     ['14 November 2026',[
       ['New: leave a voice note or a message on any page',null]
